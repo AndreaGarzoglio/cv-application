@@ -19,18 +19,20 @@ Edit your content on the left and watch an A4 preview update live on the right.
 - Profile summary, professional experience and education with dates,
   "currently here" toggle, location, grade and descriptions
 - Descriptions support `- ` bullet points and `**bold**`
-- Rename, hide, reorder and collapse every section and entry
+- Rename, hide, reorder, duplicate and collapse sections and entries
 
 **Customization**
 
-- 10 built-in presets, all editable, plus your own saved presets
+- 11 built-in presets, all editable, plus your own saved presets. The default,
+  Nebula, is a dark theme in violet, indigo and magenta
 - Sidebar left / sidebar right / one-column layouts with adjustable sidebar width
 - Section order, including moving sections between columns
-- Full color control (accent, page and sidebar colors)
+- Full color control: two accents blended into gradients, page and sidebar colors
 - 22 Google Fonts for headings and body, font size and line height
 - Page margins and section spacing
-- Six section-heading styles, uppercase toggle
-- Photo shape and size
+- Eight section-heading styles, optional section icons, uppercase toggle
+- Photo shape (circle, rounded, square, hexagon, blob, arch), size and gradient ring
+- Background shapes (glow, circles, dots, wave, diagonal) and gradient name
 - Level style for skills and languages (dots, segments, bar, text, tags)
 - Entry layout (dates right, stacked, timeline)
 - Date format and resume language (English, Italiano, Español, Français,
@@ -39,7 +41,9 @@ Edit your content on the left and watch an A4 preview update live on the right.
 **Everything else**
 
 - Download as PDF through the browser's print dialog, at true A4 size
-- Page-break guides in the preview, zoom controls
+- Real pagination: blocks never get cut by a page break and every page keeps
+  its top margin, in the preview and in the PDF
+- Zoom controls
 - Autosave to `localStorage`, JSON import/export, example data and reset
 - Responsive: on mobile you switch between editor and preview
 
