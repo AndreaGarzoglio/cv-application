@@ -7,10 +7,12 @@ import ProfileSection from './sections/ProfileSection.jsx'
 import ExperienceSection from './sections/ExperienceSection.jsx'
 import EducationSection from './sections/EducationSection.jsx'
 import { DEFAULT_SECTION_TITLES } from '../../data/sampleResume.js'
+import { SECTION_ICONS } from '../../data/sectionIcons.js'
 import '../../styles/Editor.css'
 
 function Editor({ resume, onChange }) {
   const sectionProps = (key) => ({
+    icon: SECTION_ICONS[key],
     title: resume.sectionTitles[key],
     defaultTitle: DEFAULT_SECTION_TITLES[key],
     onRename: (title) => onChange('sectionTitles', { ...resume.sectionTitles, [key]: title }),

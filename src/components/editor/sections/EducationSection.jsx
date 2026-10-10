@@ -1,4 +1,3 @@
-import { FaGraduationCap } from 'react-icons/fa6'
 import EntriesSection from '../EntriesSection.jsx'
 import DateRangeFields from '../DateRangeFields.jsx'
 import Field from '../../ui/Field.jsx'
@@ -66,7 +65,6 @@ function renderFields(entry, set) {
 function EducationSection({ education, onChange, sectionProps }) {
   return (
     <EntriesSection
-      icon={FaGraduationCap}
       entries={education}
       onChange={onChange}
       sectionProps={sectionProps}

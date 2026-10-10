@@ -1,6 +1,6 @@
-import { FaArrowDown, FaArrowUp, FaEye, FaEyeSlash, FaTrash } from 'react-icons/fa6'
+import { FaArrowDown, FaArrowUp, FaCopy, FaEye, FaEyeSlash, FaTrash } from 'react-icons/fa6'
 
-function ItemActions({ isFirst, isLast, onMove, onRemove, hidden, onToggleHidden }) {
+function ItemActions({ isFirst, isLast, onMove, onRemove, onDuplicate, hidden, onToggleHidden }) {
   return (
     <div className="item-actions">
       <button
@@ -21,6 +21,11 @@ function ItemActions({ isFirst, isLast, onMove, onRemove, hidden, onToggleHidden
       >
         <FaArrowDown size={11} />
       </button>
+      {onDuplicate && (
+        <button type="button" className="icon-btn" title="Duplicate" onClick={onDuplicate}>
+          <FaCopy size={11} />
+        </button>
+      )}
       {onToggleHidden && (
         <button
           type="button"

@@ -1,4 +1,3 @@
-import { FaBriefcase } from 'react-icons/fa6'
 import EntriesSection from '../EntriesSection.jsx'
 import DateRangeFields from '../DateRangeFields.jsx'
 import Field from '../../ui/Field.jsx'
@@ -59,7 +58,6 @@ function renderFields(entry, set) {
 function ExperienceSection({ experience, onChange, sectionProps }) {
   return (
     <EntriesSection
-      icon={FaBriefcase}
       entries={experience}
       onChange={onChange}
       sectionProps={sectionProps}

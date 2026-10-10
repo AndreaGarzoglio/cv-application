@@ -1,4 +1,4 @@
-import { FaLanguage, FaPlus } from 'react-icons/fa6'
+import { FaPlus } from 'react-icons/fa6'
 import EditorSection from '../EditorSection.jsx'
 import ItemActions from '../../ui/ItemActions.jsx'
 import LevelPicker from '../../ui/LevelPicker.jsx'
@@ -9,7 +9,7 @@ function LanguagesSection({ languages, onChange, sectionProps }) {
   const add = () => onChange([...languages, { id: uid(), name: '', level: 3, note: '' }])
 
   return (
-    <EditorSection icon={FaLanguage} {...sectionProps}>
+    <EditorSection {...sectionProps}>
       {languages.length > 0 && (
         <ul className="item-list">
           {languages.map((language, i) => {

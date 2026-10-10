@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaAddressBook, FaPlus } from 'react-icons/fa6'
+import { FaPlus } from 'react-icons/fa6'
 import EditorSection from '../EditorSection.jsx'
 import PlatformMenu from '../PlatformMenu.jsx'
 import ItemActions from '../../ui/ItemActions.jsx'
@@ -52,7 +52,7 @@ function ContactsSection({ contacts, onChange, sectionProps }) {
   }
 
   return (
-    <EditorSection icon={FaAddressBook} {...sectionProps}>
+    <EditorSection {...sectionProps}>
       {contacts.length > 0 && (
         <ul className="item-list">
           {contacts.map((contact, i) => (

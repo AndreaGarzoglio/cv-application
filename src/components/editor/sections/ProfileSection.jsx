@@ -1,10 +1,9 @@
-import { FaIdBadge } from 'react-icons/fa6'
 import EditorSection from '../EditorSection.jsx'
 import Field from '../../ui/Field.jsx'
 
 function ProfileSection({ profile, onChange, sectionProps }) {
   return (
-    <EditorSection icon={FaIdBadge} {...sectionProps}>
+    <EditorSection {...sectionProps}>
       <Field
         as="textarea"
         label="About you"

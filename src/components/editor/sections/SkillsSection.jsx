@@ -1,4 +1,4 @@
-import { FaLayerGroup, FaPlus } from 'react-icons/fa6'
+import { FaPlus } from 'react-icons/fa6'
 import EditorSection from '../EditorSection.jsx'
 import ItemActions from '../../ui/ItemActions.jsx'
 import LevelPicker from '../../ui/LevelPicker.jsx'
@@ -67,7 +67,7 @@ function SkillsSection({ categories, onChange, sectionProps }) {
   const add = () => onChange([...categories, { id: uid(), name: '', skills: [] }])
 
   return (
-    <EditorSection icon={FaLayerGroup} {...sectionProps}>
+    <EditorSection {...sectionProps}>
       {categories.length > 0 && (
         <ul className="item-list">
           {categories.map((category, i) => (

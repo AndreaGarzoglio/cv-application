@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaHeart, FaPlus, FaXmark } from 'react-icons/fa6'
+import { FaPlus, FaXmark } from 'react-icons/fa6'
 import EditorSection from '../EditorSection.jsx'
 import { removeItem, uid } from '../../../utils/list.js'
 
@@ -18,7 +18,7 @@ function InterestsSection({ interests, onChange, sectionProps }) {
   }
 
   return (
-    <EditorSection icon={FaHeart} {...sectionProps}>
+    <EditorSection {...sectionProps}>
       {interests.length > 0 && (
         <ul className="chip-list">
           {interests.map((interest) => (

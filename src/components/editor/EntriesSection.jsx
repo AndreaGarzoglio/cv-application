@@ -3,7 +3,7 @@ import { FaChevronDown, FaPlus } from 'react-icons/fa6'
 import EditorSection from './EditorSection.jsx'
 import ItemActions from '../ui/ItemActions.jsx'
 import { formatRange } from '../../utils/date.js'
-import { moveItem, removeItem, uid, updateItem } from '../../utils/list.js'
+import { duplicateItem, moveItem, removeItem, uid, updateItem } from '../../utils/list.js'
 
 function EntryCard({ entry, summary, renderFields, defaultOpen, onChange, ...actions }) {
   const [open, setOpen] = useState(defaultOpen)
@@ -45,7 +45,7 @@ function EntryCard({ entry, summary, renderFields, defaultOpen, onChange, ...act
   )
 }
 
-function EntriesSection({ icon, entries, onChange, sectionProps, createEntry, summary, renderFields, addLabel }) {
+function EntriesSection({ entries, onChange, sectionProps, createEntry, summary, renderFields, addLabel }) {
   const [lastAdded, setLastAdded] = useState(null)
 
   function add() {
@@ -55,7 +55,7 @@ function EntriesSection({ icon, entries, onChange, sectionProps, createEntry, su
   }
 
   return (
-    <EditorSection icon={icon} {...sectionProps}>
+    <EditorSection {...sectionProps}>
       {entries.length > 0 && (
         <ul className="item-list">
           {entries.map((entry, i) => (
@@ -70,6 +70,7 @@ function EntriesSection({ icon, entries, onChange, sectionProps, createEntry, su
               onChange={(patch) => onChange(updateItem(entries, entry.id, patch))}
               onMove={(dir) => onChange(moveItem(entries, entry.id, dir))}
               onRemove={() => onChange(removeItem(entries, entry.id))}
+              onDuplicate={() => onChange(duplicateItem(entries, entry.id))}
             />
           ))}
         </ul>
