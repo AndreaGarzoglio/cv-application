@@ -99,3 +99,20 @@ export function SkillGroups({ categories, variant }) {
     </div>
   )
 }
+
+export function InterestList({ interests, variant }) {
+  const items = interests.filter((i) => i.name.trim())
+  if (items.length === 0) return null
+
+  if (variant === 'inline') {
+    return <p className="cv-inline-list">{items.map((i) => i.name).join(' · ')}</p>
+  }
+
+  return (
+    <ul className={variant === 'list' ? 'cv-bullets' : 'cv-tags'}>
+      {items.map((interest) => (
+        <li key={interest.id}>{interest.name}</li>
+      ))}
+    </ul>
+  )
+}

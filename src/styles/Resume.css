@@ -418,3 +418,21 @@
   background: color-mix(in srgb, var(--h-accent) 12%, transparent);
   font-size: 0.9em;
 }
+
+/* ---------- Lists ---------- */
+
+.cv-bullets {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.cv-bullets li::marker {
+  color: var(--h-accent);
+}
+
+.cv-inline-list {
+  overflow-wrap: anywhere;
+}

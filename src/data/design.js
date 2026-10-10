@@ -27,6 +27,7 @@ export const DEFAULT_DESIGN = {
   photoSize: 128,
   skillStyle: 'dots',
   languageStyle: 'dots',
+  interestStyle: 'tags',
   dateFormat: 'short',
   showContactIcons: true,
 }
