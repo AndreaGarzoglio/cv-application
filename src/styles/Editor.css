@@ -66,3 +66,58 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* ---------- Generic item lists ---------- */
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.item-row {
+  animation: rise-in 0.35s var(--ease);
+}
+
+.item-row__line {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.platform-trigger {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--accent-strong);
+  font-size: 15px;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.15s var(--ease);
+}
+
+.platform-trigger:hover,
+.platform-trigger.is-open {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.platform-trigger:active {
+  transform: scale(0.92);
+}

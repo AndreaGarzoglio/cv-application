@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { PAGE_HEIGHT, PAGE_WIDTH } from '../../data/design.js'
+import { ContactList, ResumeSection } from './ResumeBlocks.jsx'
 import '../../styles/Resume.css'
 
 const fontStack = (font) => `'${font}', system-ui, sans-serif`
@@ -45,6 +46,11 @@ function Identity({ personal }) {
   )
 }
 
+// Fragment wrapper so falsy blocks render nothing.
+function BlockSlot({ children }) {
+  return children || null
+}
+
 function usePageCount() {
   const outerRef = useRef(null)
   const innerRef = useRef(null)
@@ -65,14 +71,33 @@ function usePageCount() {
   return { outerRef, innerRef, pages }
 }
 
+const SIDEBAR_SECTIONS = ['contacts']
+const MAIN_SECTIONS = []
+
 function Resume({ resume, design }) {
   const { outerRef, innerRef, pages } = usePageCount()
   const isSingle = design.layout === 'single'
+  const isVisible = (key) => !resume.hiddenSections.includes(key)
+  const titles = resume.sectionTitles
+
+  const blocks = {
+    contacts: () =>
+      resume.contacts.some((c) => c.value.trim()) && (
+        <ResumeSection title={titles.contacts}>
+          <ContactList contacts={resume.contacts} showIcons={design.showContactIcons} />
+        </ResumeSection>
+      ),
+  }
+
+  const renderBlocks = (keys) =>
+    keys.filter(isVisible).map((key) => <BlockSlot key={key}>{blocks[key]()}</BlockSlot>)
 
   return (
     <article
       ref={outerRef}
-      className={`resume resume--${design.layout}`}
+      className={`resume resume--${design.layout} cv-h--${design.headingStyle}${
+        design.headingUppercase ? ' cv-h--upper' : ''
+      }`}
       style={{ ...cssVariables(design), minHeight: pages * PAGE_HEIGHT }}
     >
       <div ref={innerRef} className="resume__inner">
@@ -80,17 +105,31 @@ function Resume({ resume, design }) {
           <>
             <header className="cv-header">
               <Photo resume={resume} design={design} />
-              <Identity personal={resume.personal} />
+              <div className="cv-header__text">
+                <Identity personal={resume.personal} />
+                {isVisible('contacts') && (
+                  <ContactList
+                    contacts={resume.contacts}
+                    showIcons={design.showContactIcons}
+                    inline
+                  />
+                )}
+              </div>
             </header>
-            <div className="cv-main" />
+            <div className="cv-main">
+              {renderBlocks(MAIN_SECTIONS)}
+              {renderBlocks(SIDEBAR_SECTIONS.filter((key) => key !== 'contacts'))}
+            </div>
           </>
         ) : (
           <>
             <aside className="cv-sidebar">
               <Photo resume={resume} design={design} />
+              {renderBlocks(SIDEBAR_SECTIONS)}
             </aside>
             <div className="cv-main">
               <Identity personal={resume.personal} />
+              {renderBlocks(MAIN_SECTIONS)}
             </div>
           </>
         )}

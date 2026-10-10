@@ -1,0 +1,104 @@
+.platform-picker {
+  margin-top: 0.5rem;
+  padding: 0.6rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface);
+  animation: pop-in 0.25s var(--ease);
+  transform-origin: top center;
+}
+
+.platform-picker__search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-faint);
+}
+
+.platform-picker__search:focus-within {
+  border-color: var(--accent);
+}
+
+.platform-picker__search input {
+  flex: 1;
+  height: 34px;
+  border: 0;
+  background: none;
+  outline: none;
+}
+
+.platform-picker__list {
+  max-height: 290px;
+  margin-top: 0.4rem;
+  overflow-y: auto;
+}
+
+.platform-picker__group {
+  margin: 0.6rem 0.2rem 0.35rem;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.platform-picker__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  gap: 0.3rem;
+}
+
+.platform-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  font-size: 12.5px;
+  text-align: left;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    transform 0.15s var(--ease);
+}
+
+.platform-tile svg {
+  flex-shrink: 0;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.platform-tile span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.platform-tile:hover {
+  border-color: var(--border-strong);
+  background: var(--surface-3);
+  transform: translateY(-1px);
+}
+
+.platform-tile:hover svg,
+.platform-tile.is-selected svg {
+  color: var(--accent-strong);
+}
+
+.platform-tile.is-selected {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.platform-picker__empty {
+  margin: 1rem 0;
+  text-align: center;
+  color: var(--text-faint);
+}
