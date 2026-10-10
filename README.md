@@ -1,16 +1,86 @@
-# React + Vite
+# CV Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, dark-themed resume builder made with React and Vite. It started as the
+[CV Application](https://www.theodinproject.com/lessons/node-path-react-new-cv-application)
+assignment from The Odin Project and grew into a full builder inspired by FlowCV.
 
-Currently, two official plugins are available:
+Edit your content on the left and watch an A4 preview update live on the right.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+**Content**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Personal details: name, job title and photo (resized in the browser)
+- Contacts picked from a searchable pool of 40+ platforms (email, phone,
+  LinkedIn, GitHub, Discord, Behance, ArtStation…) with icons and smart links
+- Languages with five fluency levels and an optional certificate
+- Skills grouped in custom categories, each skill with its own level
+- Interests as quick chips
+- Profile summary, professional experience and education with dates,
+  "currently here" toggle, location, grade and descriptions
+- Descriptions support `- ` bullet points and `**bold**`
+- Rename, hide, reorder and collapse every section and entry
 
-## Expanding the ESLint configuration
+**Customization**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 10 built-in presets, all editable, plus your own saved presets
+- Sidebar left / sidebar right / one-column layouts with adjustable sidebar width
+- Section order, including moving sections between columns
+- Full color control (accent, page and sidebar colors)
+- 22 Google Fonts for headings and body, font size and line height
+- Page margins and section spacing
+- Six section-heading styles, uppercase toggle
+- Photo shape and size
+- Level style for skills and languages (dots, segments, bar, text, tags)
+- Entry layout (dates right, stacked, timeline)
+- Date format and resume language (English, Italiano, Español, Français,
+  Deutsch, Português)
+
+**Everything else**
+
+- Download as PDF through the browser's print dialog, at true A4 size
+- Page-break guides in the preview, zoom controls
+- Autosave to `localStorage`, JSON import/export, example data and reset
+- Responsive: on mobile you switch between editor and preview
+
+## Getting started
+
+```bash
+npm install
+npm run dev
+```
+
+Other scripts:
+
+```bash
+npm run build     # production build in dist/
+npm run preview   # serve the production build
+npm run lint      # ESLint
+```
+
+## Exporting a PDF
+
+Click **Download PDF** and choose **Save as PDF** as the destination in the
+print dialog. Margins and backgrounds are handled by the app; leave the
+paper size on A4.
+
+## Deploying to Vercel
+
+Import the repository in Vercel: it detects Vite automatically
+(build command `npm run build`, output directory `dist`). No extra
+configuration is needed.
+
+## Project structure
+
+```
+src/
+  components/
+    editor/      content editor (sections, entries, platform picker)
+    customize/   design panel (presets, layout, colors, typography…)
+    preview/     A4 preview and resume renderer
+    ui/          small reusable inputs
+  data/          sample resume, presets, fonts, platforms, levels, locales
+  hooks/         useLocalStorage, useDismiss
+  utils/         list helpers, dates, files, image resizing
+  styles/        one stylesheet per area, plus print.css
+```
