@@ -1,13 +1,15 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { FaPenToSquare, FaPalette } from 'react-icons/fa6'
 import Topbar from './components/Topbar.jsx'
 import Editor from './components/editor/Editor.jsx'
 import CustomizePanel from './components/customize/CustomizePanel.jsx'
 import Preview from './components/preview/Preview.jsx'
 import Resume from './components/preview/Resume.jsx'
+import Toast from './components/ui/Toast.jsx'
 import { useLocalStorage } from './hooks/useLocalStorage.js'
-import { createSampleResume, mergeResume } from './data/sampleResume.js'
+import { createEmptyResume, createSampleResume, mergeResume } from './data/sampleResume.js'
 import { DEFAULT_DESIGN, mergeDesign } from './data/design.js'
+import { downloadJson, readJsonFile, slugify } from './utils/file.js'
 import './styles/App.css'
 
 const TABS = [
@@ -20,6 +22,9 @@ function App() {
   const [design, setDesign] = useLocalStorage('cv-builder:design', DEFAULT_DESIGN, mergeDesign)
   const [customPresets, setCustomPresets] = useLocalStorage('cv-builder:presets', [])
   const [tab, setTab] = useState('content')
+  const [toast, setToast] = useState(null)
+  const notify = (message, type = 'success') => setToast({ id: Date.now(), message, type })
+  const clearToast = useCallback(() => setToast(null), [])
 
   const updateResume = (key, value) => setResume((prev) => ({ ...prev, [key]: value }))
 
@@ -33,9 +38,41 @@ function App() {
     window.print()
   }
 
+  const dataActions = {
+    onExport() {
+      downloadJson(
+        { app: 'cv-builder', version: 1, resume, design },
+        `${slugify(resume.personal.fullName)}-cv.json`,
+      )
+      notify('Resume exported')
+    },
+    async onImport(file) {
+      try {
+        const data = await readJsonFile(file)
+        if (!data || typeof data.resume !== 'object') throw new Error('Not a CV Builder file')
+        setResume(mergeResume(data.resume))
+        if (data.design && typeof data.design === 'object') setDesign(mergeDesign(data.design))
+        notify('Resume imported')
+      } catch {
+        notify('That file is not a valid CV Builder export', 'error')
+      }
+    },
+    onLoadSample() {
+      if (!confirm('Replace your current content with the example resume?')) return
+      setResume(createSampleResume())
+      notify('Example loaded')
+    },
+    onClear() {
+      if (!confirm('Delete all your resume content? This cannot be undone.')) return
+      setResume(createEmptyResume())
+      notify('Content cleared')
+    },
+  }
+
   return (
     <div className="app">
-      <Topbar onDownload={downloadPdf} />
+      <Topbar onDownload={downloadPdf} {...dataActions} />
+      <Toast toast={toast} onDone={clearToast} />
       <div className="workspace">
         <aside className="workspace__editor">
           <nav className="panel-tabs" role="tablist">

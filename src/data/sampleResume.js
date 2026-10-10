@@ -138,13 +138,21 @@ export function createSampleResume() {
   }
 }
 
-// Fill in keys added in newer versions so old saved data keeps working.
+const LIST_KEYS = ['contacts', 'languages', 'skillCategories', 'interests', 'experience', 'education']
+
+// Fill in keys added in newer versions (or missing from an imported file)
+// so old or partial data keeps working.
 export function mergeResume(stored) {
   const base = createEmptyResume()
-  return {
+  const merged = {
     ...base,
     ...stored,
     personal: { ...base.personal, ...stored.personal },
     sectionTitles: { ...base.sectionTitles, ...stored.sectionTitles },
   }
+  for (const key of [...LIST_KEYS, 'hiddenSections']) {
+    if (!Array.isArray(merged[key])) merged[key] = []
+  }
+  if (typeof merged.profile !== 'string') merged.profile = ''
+  return merged
 }

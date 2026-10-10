@@ -40,3 +40,66 @@
   align-items: center;
   gap: 0.5rem;
 }
+
+/* ---------- Data menu ---------- */
+
+.menu {
+  position: relative;
+}
+
+.menu__chevron {
+  transition: transform 0.3s var(--ease);
+}
+
+.menu__chevron.is-open {
+  transform: rotate(180deg);
+}
+
+.menu__list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  padding: 0.35rem;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  box-shadow: var(--shadow);
+  animation: pop-in 0.2s var(--ease);
+  transform-origin: top right;
+}
+
+.menu__list button {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 0.65rem;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  text-align: left;
+  transition: background 0.15s;
+}
+
+.menu__list button svg {
+  color: var(--text-faint);
+}
+
+.menu__list button:hover {
+  background: var(--surface-3);
+}
+
+.menu__list button.is-danger:hover,
+.menu__list button.is-danger:hover svg {
+  color: var(--danger);
+}
+
+.menu__list hr {
+  width: 100%;
+  margin: 0.3rem 0;
+  border: 0;
+  border-top: 1px solid var(--border);
+}
