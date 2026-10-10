@@ -20,14 +20,19 @@ import RangeField from '../ui/RangeField.jsx'
 import { applyPreset } from '../../data/presets.js'
 import '../../styles/Customize.css'
 
-function CustomizePanel({ design, setDesign, hasPhoto }) {
+function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, hasPhoto }) {
   const set = (patch) => setDesign((d) => ({ ...d, ...patch }))
   const onColors = (patch) => setDesign((d) => ({ ...d, colors: { ...d.colors, ...patch } }))
 
   return (
     <div className="editor">
       <EditorSection icon={FaSwatchbook} title="Presets" defaultOpen>
-        <PresetGallery design={design} onApply={(preset) => setDesign((d) => applyPreset(d, preset))} />
+        <PresetGallery
+          design={design}
+          onApply={(preset) => setDesign((d) => applyPreset(d, preset))}
+          customPresets={customPresets}
+          setCustomPresets={setCustomPresets}
+        />
       </EditorSection>
       <EditorSection icon={FaTableColumns} title="Layout">
         <LayoutSettings design={design} set={set} />

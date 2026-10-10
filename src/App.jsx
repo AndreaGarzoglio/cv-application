@@ -18,6 +18,7 @@ const TABS = [
 function App() {
   const [resume, setResume] = useLocalStorage('cv-builder:resume', createSampleResume, mergeResume)
   const [design, setDesign] = useLocalStorage('cv-builder:design', DEFAULT_DESIGN, mergeDesign)
+  const [customPresets, setCustomPresets] = useLocalStorage('cv-builder:presets', [])
   const [tab, setTab] = useState('content')
 
   const updateResume = (key, value) => setResume((prev) => ({ ...prev, [key]: value }))
@@ -52,6 +53,8 @@ function App() {
               <CustomizePanel
                 design={design}
                 setDesign={setDesign}
+                customPresets={customPresets}
+                setCustomPresets={setCustomPresets}
                 hasPhoto={Boolean(resume.personal.photo)}
               />
             )}

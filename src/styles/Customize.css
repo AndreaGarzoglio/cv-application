@@ -32,13 +32,11 @@
 }
 
 .preset-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-  padding: 0.4rem;
+  position: relative;
   border: 1px solid var(--border);
   border-radius: var(--radius);
   background: var(--surface);
+  animation: pop-in 0.3s var(--ease) backwards;
   transition:
     border-color 0.2s,
     transform 0.25s var(--ease),
@@ -56,22 +54,73 @@
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
+.preset-card__button {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.4rem;
+  border: 0;
+  background: none;
+}
+
 .preset-card__name {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
+  width: 100%;
   font-size: 12px;
   font-weight: 500;
   color: var(--text-muted);
+}
+
+.preset-card__name span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .preset-card.is-active .preset-card__name {
   color: var(--accent-strong);
 }
 
+.preset-card__delete {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: rgb(11 13 18 / 0.85);
+  color: var(--text-muted);
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    color 0.2s;
+}
+
+.preset-card:hover .preset-card__delete,
+.preset-card__delete:focus-visible {
+  opacity: 1;
+}
+
+.preset-card__delete:hover {
+  color: var(--danger);
+}
+
+@media (hover: none) {
+  .preset-card__delete {
+    opacity: 1;
+  }
+}
+
 .preset-modified {
-  margin-top: 0.75rem;
+  margin: 0;
 }
 
 /* Mini resume used as preset thumbnail */
