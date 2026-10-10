@@ -1,5 +1,33 @@
-.cv {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 1rem;
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: clamp(380px, 36vw, 540px) 1fr;
+  flex: 1;
+  min-height: 0;
+}
+
+.workspace__editor {
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.workspace__preview {
+  position: relative;
+  overflow: auto;
+  background-color: var(--bg);
+  background-image: radial-gradient(var(--surface-3) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.preview-placeholder {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  color: var(--text-faint);
 }
