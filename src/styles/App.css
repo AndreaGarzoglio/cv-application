@@ -18,16 +18,9 @@
 }
 
 .workspace__preview {
-  position: relative;
-  overflow: auto;
+  min-width: 0;
+  overflow: hidden;
   background-color: var(--bg);
   background-image: radial-gradient(var(--surface-3) 1px, transparent 1px);
   background-size: 22px 22px;
-}
-
-.preview-placeholder {
-  display: grid;
-  place-items: center;
-  height: 100%;
-  color: var(--text-faint);
 }
