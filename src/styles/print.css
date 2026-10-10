@@ -1,0 +1,71 @@
+/* Printing (and "Save as PDF") outputs only the resume, at real A4 size.
+   Selectors are prefixed with "body" so they win over component styles,
+   which load after this file. */
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html,
+  body,
+  body #root,
+  body .app {
+    height: auto;
+    background: none;
+  }
+
+  body .topbar,
+  body .workspace__editor,
+  body .preview__toolbar,
+  body .resume__page-break,
+  body .mobile-nav {
+    display: none;
+  }
+
+  body .workspace {
+    display: block;
+  }
+
+  body .workspace__preview,
+  body .preview,
+  body .preview__scroll {
+    height: auto;
+    overflow: visible;
+    background: none;
+  }
+
+  body .preview__stage {
+    margin: 0;
+    zoom: 1 !important;
+    animation: none;
+  }
+
+  body .resume {
+    width: 210mm;
+    min-height: calc(var(--cv-pages) * 297mm) !important;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  body .resume * {
+    transition: none;
+  }
+
+  /* Repeat column padding at the top of every printed page. */
+  body .cv-sidebar,
+  body .cv-main {
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  body .cv-section__title {
+    break-after: avoid;
+  }
+
+  body .cv-levels__item,
+  body .cv-skill-group,
+  body .cv-contacts li {
+    break-inside: avoid;
+  }
+}

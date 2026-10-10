@@ -23,9 +23,19 @@ function App() {
 
   const updateResume = (key, value) => setResume((prev) => ({ ...prev, [key]: value }))
 
+  async function downloadPdf() {
+    // The browser suggests the document title as the PDF file name.
+    const previousTitle = document.title
+    const name = resume.personal.fullName.trim()
+    document.title = name ? `${name} - Resume` : 'Resume'
+    window.addEventListener('afterprint', () => (document.title = previousTitle), { once: true })
+    await document.fonts.ready
+    window.print()
+  }
+
   return (
     <div className="app">
-      <Topbar onDownload={() => window.print()} />
+      <Topbar onDownload={downloadPdf} />
       <div className="workspace">
         <aside className="workspace__editor">
           <nav className="panel-tabs" role="tablist">

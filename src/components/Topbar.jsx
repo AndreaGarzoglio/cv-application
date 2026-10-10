@@ -11,7 +11,12 @@ function Topbar({ onDownload }) {
         <span className="topbar__name">CV Builder</span>
       </div>
       <div className="topbar__actions">
-        <button type="button" className="btn btn--primary" onClick={onDownload}>
+        <button
+          type="button"
+          className="btn btn--primary"
+          title="Opens the print dialog: choose “Save as PDF”"
+          onClick={onDownload}
+        >
           <FaFilePdf /> Download PDF
         </button>
       </div>
