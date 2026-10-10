@@ -47,9 +47,37 @@
 
   body .resume {
     width: 210mm;
-    min-height: calc(var(--cv-pages) * 297mm) !important;
+    min-height: 0 !important;
+    overflow: visible;
     border-radius: 0;
+    background: none;
     box-shadow: none;
+  }
+
+  /* A fixed element repeats on every printed page, so the page and sidebar
+     colors always fill each sheet, however the content breaks. */
+  body .resume::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: var(--cv-page-bg);
+  }
+
+  body .resume--left::before {
+    background: linear-gradient(
+      to right,
+      var(--cv-side-bg) 0 var(--cv-side-w),
+      var(--cv-page-bg) var(--cv-side-w)
+    );
+  }
+
+  body .resume--right::before {
+    background: linear-gradient(
+      to left,
+      var(--cv-side-bg) 0 var(--cv-side-w),
+      var(--cv-page-bg) var(--cv-side-w)
+    );
   }
 
   body .resume * {

@@ -160,7 +160,7 @@ function Resume({ resume, design }) {
       className={`resume resume--${design.layout} cv-h--${design.headingStyle}${
         design.headingUppercase ? ' cv-h--upper' : ''
       }`}
-      style={{ ...cssVariables(design), '--cv-pages': pages, minHeight: pages * PAGE_HEIGHT }}
+      style={{ ...cssVariables(design), minHeight: pages * PAGE_HEIGHT }}
     >
       <div ref={innerRef} className="resume__inner">
         {isSingle ? (
