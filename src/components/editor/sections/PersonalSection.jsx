@@ -55,13 +55,13 @@ function PersonalSection({ personal, onChange }) {
         <div className="field-stack personal__fields">
           <Field
             label="Full name"
-            placeholder="e.g. Alex Rivera"
+            placeholder="e.g. Andrea Garzoglio"
             value={personal.fullName}
             onChange={(e) => set({ fullName: e.target.value })}
           />
           <Field
             label="Job title"
-            placeholder="e.g. Frontend Developer"
+            placeholder="e.g. Concept Artist"
             value={personal.jobTitle}
             onChange={(e) => set({ jobTitle: e.target.value })}
           />

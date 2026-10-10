@@ -79,7 +79,7 @@ export const PLATFORM_GROUPS = [
         href: (v) => `https://wa.me/${v.replace(/\D/g, '')}`,
       },
       telegram: { label: 'Telegram', icon: FaTelegram, placeholder: '@username', href: profile('https://t.me/') },
-      discord: { label: 'Discord', icon: FaDiscord, placeholder: 'username' },
+      discord: { label: 'Discord', icon: FaDiscord, placeholder: 'username or profile link', href: profile() },
       skype: { label: 'Skype', icon: FaSkype, placeholder: 'live:username' },
       slack: { label: 'Slack', icon: FaSlack, placeholder: 'workspace.slack.com' },
     },

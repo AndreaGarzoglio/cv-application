@@ -23,7 +23,7 @@ function renderFields(entry, set) {
     <>
       <Field
         label="Job title"
-        placeholder="e.g. Frontend Developer"
+        placeholder="e.g. Concept Artist & Game Writer"
         value={entry.position}
         autoFocus={!entry.position}
         onChange={(e) => set({ position: e.target.value })}
@@ -31,13 +31,13 @@ function renderFields(entry, set) {
       <div className="field-row">
         <Field
           label="Company"
-          placeholder="e.g. Acme Studio"
+          placeholder="e.g. Mad Burger Studio"
           value={entry.company}
           onChange={(e) => set({ company: e.target.value })}
         />
         <Field
           label="Location"
-          placeholder="e.g. Milan, Italy"
+          placeholder="e.g. Genoa, Italy"
           value={entry.location}
           onChange={(e) => set({ location: e.target.value })}
         />

@@ -24,7 +24,7 @@ function renderFields(entry, set) {
     <>
       <Field
         label="Course / degree"
-        placeholder="e.g. BSc in Computer Science"
+        placeholder="e.g. Full Stack Developer course"
         value={entry.degree}
         autoFocus={!entry.degree}
         onChange={(e) => set({ degree: e.target.value })}
@@ -32,7 +32,7 @@ function renderFields(entry, set) {
       <div className="field-row">
         <Field
           label="School"
-          placeholder="e.g. University of Milan"
+          placeholder="e.g. The Odin Project"
           value={entry.school}
           onChange={(e) => set({ school: e.target.value })}
         />
@@ -46,7 +46,7 @@ function renderFields(entry, set) {
       <DateRangeFields entry={entry} onChange={set} currentLabel="I currently study here" />
       <Field
         label="Grade"
-        placeholder="e.g. 108/110, GPA 3.8"
+        placeholder="e.g. 27/30, 81/100"
         value={entry.grade}
         onChange={(e) => set({ grade: e.target.value })}
       />

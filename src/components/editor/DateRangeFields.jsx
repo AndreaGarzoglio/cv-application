@@ -1,6 +1,8 @@
 import Field from '../ui/Field.jsx'
 import Switch from '../ui/Switch.jsx'
 
+const isYearOnly = (value) => /^\d{4}$/.test(value)
+
 function DateRangeFields({ entry, onChange, currentLabel }) {
   return (
     <>
@@ -19,6 +21,9 @@ function DateRangeFields({ entry, onChange, currentLabel }) {
           onChange={(e) => onChange({ endDate: e.target.value })}
         />
       </div>
+      {[entry.startDate, entry.current ? '' : entry.endDate].some(isYearOnly) && (
+        <p className="hint">Saved with the year only. Pick a month to be more precise.</p>
+      )}
       <Switch
         label={currentLabel}
         checked={entry.current}
