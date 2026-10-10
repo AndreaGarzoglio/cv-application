@@ -11,6 +11,7 @@ import {
 import RichText from './RichText.jsx'
 import { getStrings } from '../../data/locales.js'
 import { fontStack } from '../../data/fonts.js'
+import { sectionTitle } from '../../data/sampleResume.js'
 import '../../styles/Resume.css'
 
 
@@ -84,7 +85,9 @@ function Resume({ resume, design }) {
   const { outerRef, innerRef, pages } = usePageCount()
   const isSingle = design.layout === 'single'
   const isVisible = (key) => !resume.hiddenSections.includes(key)
-  const titles = resume.sectionTitles
+  const titles = Object.fromEntries(
+    Object.keys(resume.sectionTitles).map((key) => [key, sectionTitle(resume.sectionTitles, key)]),
+  )
   const { sidebar, main } = design.sections
 
   const blocks = {

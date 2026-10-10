@@ -10,6 +10,10 @@ export const DEFAULT_SECTION_TITLES = {
   education: 'Education',
 }
 
+export function sectionTitle(titles, key) {
+  return titles[key]?.trim() || DEFAULT_SECTION_TITLES[key]
+}
+
 export function createEmptyResume() {
   return {
     personal: { fullName: '', jobTitle: '', photo: '' },

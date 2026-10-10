@@ -1,4 +1,5 @@
 import { FaArrowDown, FaArrowLeft, FaArrowRight, FaArrowUp } from 'react-icons/fa6'
+import { sectionTitle } from '../../data/sampleResume.js'
 
 const COLUMNS = [
   { id: 'sidebar', label: 'Sidebar' },
@@ -34,7 +35,7 @@ function SectionOrder({ sections, titles, layout, onChange }) {
             <ul>
               {sections[column.id].map((key, i, list) => (
                 <li key={key} className="section-order__item">
-                  <span>{titles[key]}</span>
+                  <span>{sectionTitle(titles, key)}</span>
                   <button
                     type="button"
                     className="icon-btn"

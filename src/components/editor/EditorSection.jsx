@@ -5,6 +5,7 @@ import '../../styles/EditorSection.css'
 function EditorSection({
   icon: Icon,
   title,
+  defaultTitle = title,
   onRename,
   hidden = false,
   onToggleHidden,
@@ -25,6 +26,7 @@ function EditorSection({
             <input
               className="ed-section__rename"
               value={title}
+              placeholder={defaultTitle}
               autoFocus
               aria-label="Section title"
               onChange={(e) => onRename(e.target.value)}
@@ -42,7 +44,7 @@ function EditorSection({
             <span className="ed-section__icon">
               <Icon />
             </span>
-            <span className="ed-section__title">{title}</span>
+            <span className="ed-section__title">{title.trim() || defaultTitle}</span>
           </button>
         )}
 

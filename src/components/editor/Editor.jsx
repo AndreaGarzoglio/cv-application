@@ -6,11 +6,13 @@ import InterestsSection from './sections/InterestsSection.jsx'
 import ProfileSection from './sections/ProfileSection.jsx'
 import ExperienceSection from './sections/ExperienceSection.jsx'
 import EducationSection from './sections/EducationSection.jsx'
+import { DEFAULT_SECTION_TITLES } from '../../data/sampleResume.js'
 import '../../styles/Editor.css'
 
 function Editor({ resume, onChange }) {
   const sectionProps = (key) => ({
     title: resume.sectionTitles[key],
+    defaultTitle: DEFAULT_SECTION_TITLES[key],
     onRename: (title) => onChange('sectionTitles', { ...resume.sectionTitles, [key]: title }),
     hidden: resume.hiddenSections.includes(key),
     onToggleHidden: () =>
