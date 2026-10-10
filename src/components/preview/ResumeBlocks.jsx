@@ -1,5 +1,5 @@
 import LevelIndicator from './LevelIndicator.jsx'
-import { LANGUAGE_LEVELS } from '../../data/levels.js'
+import { LANGUAGE_LEVELS, SKILL_LEVELS } from '../../data/levels.js'
 import { contactHref, displayValue, getPlatform } from '../../data/platforms.js'
 
 export function ResumeSection({ title, className = '', children }) {
@@ -71,5 +71,31 @@ export function LanguageList({ languages, variant }) {
       labels={LANGUAGE_LEVELS}
       renderNote={(l) => l.note.trim() && <span className="cv-levels__note">{l.note}</span>}
     />
+  )
+}
+
+export function SkillGroups({ categories, variant }) {
+  const groups = categories
+    .map((c) => ({ ...c, skills: c.skills.filter((s) => s.name.trim()) }))
+    .filter((c) => c.skills.length > 0)
+  if (groups.length === 0) return null
+
+  return (
+    <div className="cv-skill-groups">
+      {groups.map((group) => (
+        <div key={group.id} className="cv-skill-group">
+          {group.name.trim() && <h3 className="cv-skill-group__name">{group.name}</h3>}
+          {variant === 'tags' ? (
+            <ul className="cv-tags">
+              {group.skills.map((skill) => (
+                <li key={skill.id}>{skill.name}</li>
+              ))}
+            </ul>
+          ) : (
+            <LevelList items={group.skills} variant={variant} labels={SKILL_LEVELS} />
+          )}
+        </div>
+      ))}
+    </div>
   )
 }

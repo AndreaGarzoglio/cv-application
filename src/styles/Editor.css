@@ -191,3 +191,28 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+/* ---------- Skills ---------- */
+
+.skill-category__name {
+  font-weight: 600;
+}
+
+.skill-list {
+  margin: 0;
+  padding-left: 0.75rem;
+  border-left: 2px solid var(--border);
+}
+
+.skill-category__add {
+  align-self: flex-start;
+  margin-left: 0.5rem;
+}
+
+.skill-category__add:hover {
+  color: var(--accent-strong);
+}
+
+.item-actions .icon-btn {
+  width: 26px;
+}

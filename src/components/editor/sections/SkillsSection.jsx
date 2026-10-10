@@ -1,0 +1,93 @@
+import { FaLayerGroup, FaPlus } from 'react-icons/fa6'
+import EditorSection from '../EditorSection.jsx'
+import ItemActions from '../../ui/ItemActions.jsx'
+import LevelPicker from '../../ui/LevelPicker.jsx'
+import { SKILL_LEVELS } from '../../../data/levels.js'
+import { moveItem, removeItem, uid, updateItem } from '../../../utils/list.js'
+
+function SkillCategory({ category, onChange, ...actions }) {
+  const { skills } = category
+  const setSkills = (next) => onChange({ skills: next })
+  const addSkill = () => setSkills([...skills, { id: uid(), name: '', level: 3 }])
+
+  return (
+    <li className="item-row mini-card skill-category">
+      <div className="item-row__line">
+        <input
+          className="input skill-category__name"
+          aria-label="Category name"
+          placeholder="Category (e.g. Drawing)"
+          value={category.name}
+          autoFocus={!category.name && skills.length === 0}
+          onChange={(e) => onChange({ name: e.target.value })}
+        />
+        <ItemActions {...actions} />
+      </div>
+
+      {skills.length > 0 && (
+        <ul className="item-list skill-list">
+          {skills.map((skill, i) => {
+            const set = (patch) => setSkills(updateItem(skills, skill.id, patch))
+            return (
+              <li key={skill.id} className="item-row item-row__line">
+                <input
+                  className="input"
+                  aria-label="Skill"
+                  placeholder="Skill (e.g. Procreate)"
+                  value={skill.name}
+                  autoFocus={!skill.name}
+                  onChange={(e) => set({ name: e.target.value })}
+                />
+                <LevelPicker
+                  compact
+                  labels={SKILL_LEVELS}
+                  value={skill.level}
+                  onChange={(level) => set({ level })}
+                />
+                <ItemActions
+                  isFirst={i === 0}
+                  isLast={i === skills.length - 1}
+                  onMove={(dir) => setSkills(moveItem(skills, skill.id, dir))}
+                  onRemove={() => setSkills(removeItem(skills, skill.id))}
+                />
+              </li>
+            )
+          })}
+        </ul>
+      )}
+
+      <button type="button" className="btn btn--ghost btn--sm skill-category__add" onClick={addSkill}>
+        <FaPlus size={10} /> Add skill
+      </button>
+    </li>
+  )
+}
+
+function SkillsSection({ categories, onChange, sectionProps }) {
+  const add = () => onChange([...categories, { id: uid(), name: '', skills: [] }])
+
+  return (
+    <EditorSection icon={FaLayerGroup} {...sectionProps}>
+      {categories.length > 0 && (
+        <ul className="item-list">
+          {categories.map((category, i) => (
+            <SkillCategory
+              key={category.id}
+              category={category}
+              isFirst={i === 0}
+              isLast={i === categories.length - 1}
+              onChange={(patch) => onChange(updateItem(categories, category.id, patch))}
+              onMove={(dir) => onChange(moveItem(categories, category.id, dir))}
+              onRemove={() => onChange(removeItem(categories, category.id))}
+            />
+          ))}
+        </ul>
+      )}
+      <button type="button" className="btn btn--dashed" onClick={add}>
+        <FaPlus size={11} /> Add category
+      </button>
+    </EditorSection>
+  )
+}
+
+export default SkillsSection

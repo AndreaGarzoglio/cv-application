@@ -380,3 +380,41 @@
   opacity: 0.75;
   white-space: nowrap;
 }
+
+/* ---------- Skills ---------- */
+
+.cv-skill-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 0.95em;
+}
+
+.cv-skill-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45em;
+}
+
+.cv-skill-group__name {
+  color: var(--h-color);
+  font-size: 0.92em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+}
+
+.cv-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-tags li {
+  padding: 0.2em 0.7em;
+  border: 1px solid color-mix(in srgb, var(--h-accent) 45%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--h-accent) 12%, transparent);
+  font-size: 0.9em;
+}
