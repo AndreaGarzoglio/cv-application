@@ -7,6 +7,7 @@ import {
   ResumeSection,
   SkillGroups,
 } from './ResumeBlocks.jsx'
+import RichText from './RichText.jsx'
 import '../../styles/Resume.css'
 
 const fontStack = (font) => `'${font}', system-ui, sans-serif`
@@ -78,7 +79,7 @@ function usePageCount() {
 }
 
 const SIDEBAR_SECTIONS = ['contacts', 'languages', 'skills', 'interests']
-const MAIN_SECTIONS = []
+const MAIN_SECTIONS = ['profile']
 
 function Resume({ resume, design }) {
   const { outerRef, innerRef, pages } = usePageCount()
@@ -109,6 +110,12 @@ function Resume({ resume, design }) {
       resume.interests.length > 0 && (
         <ResumeSection title={titles.interests}>
           <InterestList interests={resume.interests} variant={design.interestStyle} />
+        </ResumeSection>
+      ),
+    profile: () =>
+      resume.profile.trim() && (
+        <ResumeSection title={titles.profile}>
+          <RichText text={resume.profile} />
         </ResumeSection>
       ),
   }

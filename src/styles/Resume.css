@@ -436,3 +436,16 @@
 .cv-inline-list {
   overflow-wrap: anywhere;
 }
+
+/* ---------- Rich text ---------- */
+
+.cv-rich {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.cv-rich strong {
+  color: var(--h-color);
+  font-weight: 600;
+}

@@ -3,6 +3,7 @@ import ContactsSection from './sections/ContactsSection.jsx'
 import LanguagesSection from './sections/LanguagesSection.jsx'
 import SkillsSection from './sections/SkillsSection.jsx'
 import InterestsSection from './sections/InterestsSection.jsx'
+import ProfileSection from './sections/ProfileSection.jsx'
 import '../../styles/Editor.css'
 
 function Editor({ resume, onChange }) {
@@ -42,6 +43,13 @@ function Editor({ resume, onChange }) {
         interests={resume.interests}
         onChange={(v) => onChange('interests', v)}
         sectionProps={sectionProps('interests')}
+      />
+
+      <h2 className="editor__group-label">Main</h2>
+      <ProfileSection
+        profile={resume.profile}
+        onChange={(v) => onChange('profile', v)}
+        sectionProps={sectionProps('profile')}
       />
     </div>
   )
