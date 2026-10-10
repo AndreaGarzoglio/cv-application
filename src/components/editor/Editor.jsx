@@ -4,6 +4,7 @@ import LanguagesSection from './sections/LanguagesSection.jsx'
 import SkillsSection from './sections/SkillsSection.jsx'
 import InterestsSection from './sections/InterestsSection.jsx'
 import ProfileSection from './sections/ProfileSection.jsx'
+import ExperienceSection from './sections/ExperienceSection.jsx'
 import '../../styles/Editor.css'
 
 function Editor({ resume, onChange }) {
@@ -50,6 +51,11 @@ function Editor({ resume, onChange }) {
         profile={resume.profile}
         onChange={(v) => onChange('profile', v)}
         sectionProps={sectionProps('profile')}
+      />
+      <ExperienceSection
+        experience={resume.experience}
+        onChange={(v) => onChange('experience', v)}
+        sectionProps={sectionProps('experience')}
       />
     </div>
   )

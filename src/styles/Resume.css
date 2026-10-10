@@ -449,3 +449,100 @@
   color: var(--h-color);
   font-weight: 600;
 }
+
+/* ---------- Entries (experience & education) ---------- */
+
+.cv-entries {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1em;
+}
+
+.cv-entry {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  break-inside: avoid;
+}
+
+.cv-entry__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.cv-entry__titles {
+  min-width: 0;
+}
+
+.cv-entry__title {
+  color: var(--h-color);
+  font-family: var(--cv-font-heading);
+  font-size: 1.08em;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.cv-entry__subtitle {
+  color: var(--h-accent);
+  font-weight: 500;
+}
+
+.cv-entry__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  font-size: 0.9em;
+  text-align: right;
+  opacity: 0.8;
+}
+
+.cv-entry__dates {
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cv-entries--stacked .cv-entry__header {
+  flex-direction: column;
+  gap: 0.15em;
+}
+
+.cv-entries--stacked .cv-entry__meta {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6em;
+  text-align: left;
+}
+
+.cv-entries--stacked .cv-entry__meta > * + *::before {
+  content: '·';
+  margin-right: 0.6em;
+}
+
+.cv-entries--timeline {
+  gap: 0;
+}
+
+.cv-entries--timeline .cv-entry {
+  position: relative;
+  padding: 0 0 1.1em 1.4em;
+  border-left: 2px solid color-mix(in srgb, var(--h-accent) 30%, transparent);
+}
+
+.cv-entries--timeline .cv-entry:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+
+.cv-entries--timeline .cv-entry::before {
+  content: '';
+  position: absolute;
+  top: 0.3em;
+  left: calc(-0.4em - 1px);
+  width: 0.8em;
+  height: 0.8em;
+  border: 2px solid var(--h-accent);
+  border-radius: 50%;
+  background: var(--cv-page-bg);
+}

@@ -1,3 +1,5 @@
+import RichText from './RichText.jsx'
+import { formatRange } from '../../utils/date.js'
 import LevelIndicator from './LevelIndicator.jsx'
 import { LANGUAGE_LEVELS, SKILL_LEVELS } from '../../data/levels.js'
 import { contactHref, displayValue, getPlatform } from '../../data/platforms.js'
@@ -114,5 +116,37 @@ export function InterestList({ interests, variant }) {
         <li key={interest.id}>{interest.name}</li>
       ))}
     </ul>
+  )
+}
+
+export function EntryList({ entries, design, getHeading }) {
+  const items = entries.filter((e) => !e.hidden)
+  if (items.length === 0) return null
+
+  return (
+    <div className={`cv-entries cv-entries--${design.entryLayout}`}>
+      {items.map((entry) => {
+        const { title, subtitle, extra } = getHeading(entry)
+        const dates = formatRange(entry, design.dateFormat, design.resumeLanguage)
+        return (
+          <article key={entry.id} className="cv-entry">
+            <header className="cv-entry__header">
+              <div className="cv-entry__titles">
+                {title && <h3 className="cv-entry__title">{title}</h3>}
+                {subtitle && <p className="cv-entry__subtitle">{subtitle}</p>}
+              </div>
+              {(dates || entry.location) && (
+                <div className="cv-entry__meta">
+                  {dates && <span className="cv-entry__dates">{dates}</span>}
+                  {entry.location && <span className="cv-entry__location">{entry.location}</span>}
+                </div>
+              )}
+            </header>
+            {extra}
+            {entry.description?.trim() && <RichText text={entry.description} />}
+          </article>
+        )
+      })}
+    </div>
   )
 }

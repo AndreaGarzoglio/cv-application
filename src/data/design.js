@@ -29,6 +29,8 @@ export const DEFAULT_DESIGN = {
   languageStyle: 'dots',
   interestStyle: 'tags',
   dateFormat: 'short',
+  resumeLanguage: 'en',
+  entryLayout: 'split',
   showContactIcons: true,
 }
 

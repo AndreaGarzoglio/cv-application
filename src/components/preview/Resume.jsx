@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { PAGE_HEIGHT, PAGE_WIDTH } from '../../data/design.js'
 import {
   ContactList,
+  EntryList,
   InterestList,
   LanguageList,
   ResumeSection,
@@ -79,7 +80,7 @@ function usePageCount() {
 }
 
 const SIDEBAR_SECTIONS = ['contacts', 'languages', 'skills', 'interests']
-const MAIN_SECTIONS = ['profile']
+const MAIN_SECTIONS = ['profile', 'experience']
 
 function Resume({ resume, design }) {
   const { outerRef, innerRef, pages } = usePageCount()
@@ -116,6 +117,16 @@ function Resume({ resume, design }) {
       resume.profile.trim() && (
         <ResumeSection title={titles.profile}>
           <RichText text={resume.profile} />
+        </ResumeSection>
+      ),
+    experience: () =>
+      resume.experience.some((e) => !e.hidden) && (
+        <ResumeSection title={titles.experience}>
+          <EntryList
+            entries={resume.experience}
+            design={design}
+            getHeading={(e) => ({ title: e.position, subtitle: e.company })}
+          />
         </ResumeSection>
       ),
   }
