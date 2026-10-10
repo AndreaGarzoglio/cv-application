@@ -49,7 +49,11 @@ function App() {
             {tab === 'content' ? (
               <Editor resume={resume} onChange={updateResume} />
             ) : (
-              <CustomizePanel design={design} setDesign={setDesign} />
+              <CustomizePanel
+                design={design}
+                setDesign={setDesign}
+                hasPhoto={Boolean(resume.personal.photo)}
+              />
             )}
           </div>
         </aside>

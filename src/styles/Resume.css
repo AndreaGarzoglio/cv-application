@@ -555,3 +555,25 @@
   color: var(--h-color);
   font-weight: 600;
 }
+
+/* ---------- One-column layout: spread short lists across columns ---------- */
+
+.resume--single .cv-skill-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 1em 2.5em;
+}
+
+.resume--single .cv-section > .cv-levels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 0.6em 2.5em;
+}
+
+.resume--single .cv-levels__item {
+  justify-content: flex-start;
+}
+
+.resume--single .cv-levels:not(.cv-levels--bar) .cv-levels__head {
+  flex: 1;
+}

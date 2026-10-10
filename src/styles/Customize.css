@@ -251,3 +251,122 @@
   text-transform: uppercase;
   outline: none;
 }
+
+/* ---------- Layout cards ---------- */
+
+.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.layout-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 12px;
+  color: var(--text-muted);
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.25s var(--ease);
+}
+
+.layout-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.layout-card.is-active {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.layout-card__diagram {
+  display: grid;
+  grid-template-columns: 35% 1fr;
+  gap: 3px;
+  width: 44px;
+  height: 58px;
+  padding: 4px;
+  border-radius: 4px;
+  background: var(--surface-3);
+}
+
+.layout-card__diagram i,
+.layout-card__diagram b {
+  border-radius: 2px;
+}
+
+.layout-card__diagram i {
+  background: var(--accent);
+  opacity: 0.85;
+}
+
+.layout-card__diagram b {
+  background: var(--text-faint);
+  opacity: 0.5;
+}
+
+.layout-card__diagram--right {
+  grid-template-columns: 1fr 35%;
+}
+
+.layout-card__diagram--right i {
+  order: 2;
+}
+
+.layout-card__diagram--single {
+  grid-template-columns: 1fr;
+  grid-template-rows: 22% 1fr;
+}
+
+/* ---------- Heading styles ---------- */
+
+.heading-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.heading-card {
+  --h-color: var(--text);
+  --h-accent: var(--accent);
+  --cv-page-bg: #0b0a1a;
+  padding: 0.65rem 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 12px;
+  text-align: left;
+  transition:
+    border-color 0.2s,
+    transform 0.25s var(--ease);
+}
+
+.heading-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.heading-card.is-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.heading-card .cv-section__title {
+  display: block;
+  font-family: var(--font-display);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.heading-card.cv-h--line .cv-section__title {
+  display: flex;
+}
