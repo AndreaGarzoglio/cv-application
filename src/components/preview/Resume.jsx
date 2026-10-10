@@ -9,6 +9,7 @@ import {
   SkillGroups,
 } from './ResumeBlocks.jsx'
 import RichText from './RichText.jsx'
+import { getStrings } from '../../data/locales.js'
 import '../../styles/Resume.css'
 
 const fontStack = (font) => `'${font}', system-ui, sans-serif`
@@ -80,7 +81,7 @@ function usePageCount() {
 }
 
 const SIDEBAR_SECTIONS = ['contacts', 'languages', 'skills', 'interests']
-const MAIN_SECTIONS = ['profile', 'experience']
+const MAIN_SECTIONS = ['profile', 'experience', 'education']
 
 function Resume({ resume, design }) {
   const { outerRef, innerRef, pages } = usePageCount()
@@ -126,6 +127,24 @@ function Resume({ resume, design }) {
             entries={resume.experience}
             design={design}
             getHeading={(e) => ({ title: e.position, subtitle: e.company })}
+          />
+        </ResumeSection>
+      ),
+    education: () =>
+      resume.education.some((e) => !e.hidden) && (
+        <ResumeSection title={titles.education}>
+          <EntryList
+            entries={resume.education}
+            design={design}
+            getHeading={(e) => ({
+              title: e.degree,
+              subtitle: e.school,
+              extra: e.grade.trim() && (
+                <p className="cv-entry__grade">
+                  {getStrings(design.resumeLanguage).grade}: <strong>{e.grade}</strong>
+                </p>
+              ),
+            })}
           />
         </ResumeSection>
       ),
