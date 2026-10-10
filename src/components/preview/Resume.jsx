@@ -80,14 +80,12 @@ function usePageCount() {
   return { outerRef, innerRef, pages }
 }
 
-const SIDEBAR_SECTIONS = ['contacts', 'languages', 'skills', 'interests']
-const MAIN_SECTIONS = ['profile', 'experience', 'education']
-
 function Resume({ resume, design }) {
   const { outerRef, innerRef, pages } = usePageCount()
   const isSingle = design.layout === 'single'
   const isVisible = (key) => !resume.hiddenSections.includes(key)
   const titles = resume.sectionTitles
+  const { sidebar, main } = design.sections
 
   const blocks = {
     contacts: () =>
@@ -178,19 +176,18 @@ function Resume({ resume, design }) {
               </div>
             </header>
             <div className="cv-main">
-              {renderBlocks(MAIN_SECTIONS)}
-              {renderBlocks(SIDEBAR_SECTIONS.filter((key) => key !== 'contacts'))}
+              {renderBlocks([...main, ...sidebar].filter((key) => key !== 'contacts'))}
             </div>
           </>
         ) : (
           <>
             <aside className="cv-sidebar">
               <Photo resume={resume} design={design} />
-              {renderBlocks(SIDEBAR_SECTIONS)}
+              {renderBlocks(sidebar)}
             </aside>
             <div className="cv-main">
               <Identity personal={resume.personal} />
-              {renderBlocks(MAIN_SECTIONS)}
+              {renderBlocks(main)}
             </div>
           </>
         )}

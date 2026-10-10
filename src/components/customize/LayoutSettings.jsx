@@ -1,5 +1,6 @@
 import RangeField from '../ui/RangeField.jsx'
 import Segmented from '../ui/Segmented.jsx'
+import SectionOrder from './SectionOrder.jsx'
 
 const LAYOUTS = [
   { value: 'left', label: 'Sidebar left' },
@@ -13,7 +14,7 @@ const ENTRY_LAYOUTS = [
   { value: 'timeline', label: 'Timeline' },
 ]
 
-function LayoutSettings({ design, set }) {
+function LayoutSettings({ design, set, sectionTitles }) {
   return (
     <div className="field-stack">
       <div className="layout-grid">
@@ -50,6 +51,12 @@ function LayoutSettings({ design, set }) {
           onChange={(entryLayout) => set({ entryLayout })}
         />
       </div>
+      <SectionOrder
+        sections={design.sections}
+        titles={sectionTitles}
+        layout={design.layout}
+        onChange={(sections) => set({ sections })}
+      />
     </div>
   )
 }

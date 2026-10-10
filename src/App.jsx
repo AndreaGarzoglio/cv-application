@@ -55,7 +55,7 @@ function App() {
                 setDesign={setDesign}
                 customPresets={customPresets}
                 setCustomPresets={setCustomPresets}
-                hasPhoto={Boolean(resume.personal.photo)}
+                resume={resume}
               />
             )}
           </div>

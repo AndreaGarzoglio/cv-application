@@ -20,7 +20,7 @@ import RangeField from '../ui/RangeField.jsx'
 import { applyPreset } from '../../data/presets.js'
 import '../../styles/Customize.css'
 
-function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, hasPhoto }) {
+function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, resume }) {
   const set = (patch) => setDesign((d) => ({ ...d, ...patch }))
   const onColors = (patch) => setDesign((d) => ({ ...d, colors: { ...d.colors, ...patch } }))
 
@@ -35,7 +35,7 @@ function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, ha
         />
       </EditorSection>
       <EditorSection icon={FaTableColumns} title="Layout">
-        <LayoutSettings design={design} set={set} />
+        <LayoutSettings design={design} set={set} sectionTitles={resume.sectionTitles} />
       </EditorSection>
       <EditorSection icon={FaPalette} title="Colors">
         <ColorSettings design={design} onColors={onColors} />
@@ -69,7 +69,7 @@ function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, ha
         <HeadingSettings design={design} set={set} />
       </EditorSection>
       <EditorSection icon={FaCamera} title="Photo">
-        <PhotoSettings design={design} set={set} hasPhoto={hasPhoto} />
+        <PhotoSettings design={design} set={set} hasPhoto={Boolean(resume.personal.photo)} />
       </EditorSection>
       <EditorSection icon={FaListCheck} title="Details & dates">
         <DisplaySettings design={design} set={set} />
