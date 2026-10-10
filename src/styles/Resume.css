@@ -280,3 +280,103 @@
 .cv-header .cv-contacts {
   --h-accent: var(--cv-accent);
 }
+
+/* ---------- Levels (languages & skills) ---------- */
+
+.cv-levels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0;
+  list-style: none;
+}
+
+.cv-levels__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75em;
+  min-width: 0;
+}
+
+.cv-levels--bar .cv-levels__item {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.3em;
+}
+
+.cv-levels__head {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cv-levels__name {
+  font-weight: 500;
+}
+
+.cv-levels__note {
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+.cv-level {
+  flex-shrink: 0;
+}
+
+.cv-level--dots,
+.cv-level--segments {
+  display: inline-flex;
+  gap: 0.28em;
+}
+
+.cv-level--dots span,
+.cv-level--segments span {
+  width: 0.6em;
+  height: 0.6em;
+  border-radius: 50%;
+  background: var(--h-accent);
+  opacity: 0.22;
+}
+
+.cv-level--segments span {
+  width: 1.1em;
+  height: 0.35em;
+  border-radius: 2px;
+}
+
+.cv-level--dots span.is-on,
+.cv-level--segments span.is-on {
+  opacity: 1;
+}
+
+.cv-level--bar {
+  position: relative;
+  display: block;
+  height: 0.38em;
+  overflow: hidden;
+  border-radius: 999px;
+}
+
+.cv-level--bar::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--h-accent);
+  opacity: 0.2;
+}
+
+.cv-level--bar span {
+  position: relative;
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--h-accent);
+}
+
+.cv-level--text {
+  font-size: 0.88em;
+  opacity: 0.75;
+  white-space: nowrap;
+}

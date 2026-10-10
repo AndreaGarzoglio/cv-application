@@ -1,5 +1,6 @@
 import PersonalSection from './sections/PersonalSection.jsx'
 import ContactsSection from './sections/ContactsSection.jsx'
+import LanguagesSection from './sections/LanguagesSection.jsx'
 import '../../styles/Editor.css'
 
 function Editor({ resume, onChange }) {
@@ -24,6 +25,11 @@ function Editor({ resume, onChange }) {
         contacts={resume.contacts}
         onChange={(v) => onChange('contacts', v)}
         sectionProps={sectionProps('contacts')}
+      />
+      <LanguagesSection
+        languages={resume.languages}
+        onChange={(v) => onChange('languages', v)}
+        sectionProps={sectionProps('languages')}
       />
     </div>
   )

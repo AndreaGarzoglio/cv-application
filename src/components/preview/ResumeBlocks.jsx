@@ -1,3 +1,5 @@
+import LevelIndicator from './LevelIndicator.jsx'
+import { LANGUAGE_LEVELS } from '../../data/levels.js'
 import { contactHref, displayValue, getPlatform } from '../../data/platforms.js'
 
 export function ResumeSection({ title, className = '', children }) {
@@ -40,5 +42,34 @@ export function ContactList({ contacts, showIcons, inline = false }) {
         )
       })}
     </ul>
+  )
+}
+
+export function LevelList({ items, variant, labels, renderNote }) {
+  return (
+    <ul className={`cv-levels cv-levels--${variant}`}>
+      {items.map((item) => (
+        <li key={item.id} className="cv-levels__item">
+          <span className="cv-levels__head">
+            <span className="cv-levels__name">{item.name}</span>
+            {renderNote?.(item)}
+          </span>
+          <LevelIndicator level={item.level} variant={variant} labels={labels} />
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+export function LanguageList({ languages, variant }) {
+  const items = languages.filter((l) => l.name.trim())
+  if (items.length === 0) return null
+  return (
+    <LevelList
+      items={items}
+      variant={variant}
+      labels={LANGUAGE_LEVELS}
+      renderNote={(l) => l.note.trim() && <span className="cv-levels__note">{l.note}</span>}
+    />
   )
 }

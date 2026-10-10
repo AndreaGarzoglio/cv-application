@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { PAGE_HEIGHT, PAGE_WIDTH } from '../../data/design.js'
-import { ContactList, ResumeSection } from './ResumeBlocks.jsx'
+import { ContactList, LanguageList, ResumeSection } from './ResumeBlocks.jsx'
 import '../../styles/Resume.css'
 
 const fontStack = (font) => `'${font}', system-ui, sans-serif`
@@ -71,7 +71,7 @@ function usePageCount() {
   return { outerRef, innerRef, pages }
 }
 
-const SIDEBAR_SECTIONS = ['contacts']
+const SIDEBAR_SECTIONS = ['contacts', 'languages']
 const MAIN_SECTIONS = []
 
 function Resume({ resume, design }) {
@@ -85,6 +85,12 @@ function Resume({ resume, design }) {
       resume.contacts.some((c) => c.value.trim()) && (
         <ResumeSection title={titles.contacts}>
           <ContactList contacts={resume.contacts} showIcons={design.showContactIcons} />
+        </ResumeSection>
+      ),
+    languages: () =>
+      resume.languages.some((l) => l.name.trim()) && (
+        <ResumeSection title={titles.languages}>
+          <LanguageList languages={resume.languages} variant={design.languageStyle} />
         </ResumeSection>
       ),
   }
