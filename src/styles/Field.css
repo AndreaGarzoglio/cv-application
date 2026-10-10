@@ -83,6 +83,7 @@ input[type='month'].input::-webkit-calendar-picker-indicator {
 /* ---------- Switch ---------- */
 
 .switch {
+  position: relative; /* contains the visually hidden checkbox */
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
