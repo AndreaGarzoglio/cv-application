@@ -1,0 +1,253 @@
+.settings-label {
+  margin: 0 0 0.5rem;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.settings-label span {
+  font-weight: 400;
+  color: var(--text-faint);
+}
+
+.is-disabled {
+  opacity: 0.5;
+}
+
+.link-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent-strong);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---------- Presets ---------- */
+
+.preset-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(84px, 1fr));
+  gap: 0.6rem;
+}
+
+.preset-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition:
+    border-color 0.2s,
+    transform 0.25s var(--ease),
+    box-shadow 0.25s;
+}
+
+.preset-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.preset-card.is-active {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.preset-card__name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.preset-card.is-active .preset-card__name {
+  color: var(--accent-strong);
+}
+
+.preset-modified {
+  margin-top: 0.75rem;
+}
+
+/* Mini resume used as preset thumbnail */
+.preset-thumb {
+  display: grid;
+  grid-template-columns: 36% 1fr;
+  aspect-ratio: 210 / 297;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--p-page);
+}
+
+.preset-thumb--right {
+  grid-template-columns: 1fr 36%;
+}
+
+.preset-thumb--right .preset-thumb__side {
+  order: 2;
+}
+
+.preset-thumb--single {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+}
+
+.preset-thumb__side,
+.preset-thumb__main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 6px;
+}
+
+.preset-thumb__side {
+  align-items: center;
+  background: var(--p-side);
+}
+
+.preset-thumb--single .preset-thumb__side {
+  flex-direction: row;
+  gap: 5px;
+  padding-bottom: 2px;
+  background: transparent;
+}
+
+.preset-thumb--single .preset-thumb__side i {
+  display: none;
+}
+
+.preset-thumb__avatar {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--p-accent);
+  opacity: 0.85;
+}
+
+.preset-thumb i,
+.preset-thumb b,
+.preset-thumb em {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.preset-thumb__side i {
+  width: 80%;
+  background: var(--p-side-text);
+  opacity: 0.45;
+}
+
+.preset-thumb__main b {
+  width: 70%;
+  height: 5px;
+  background: var(--p-heading);
+}
+
+.preset-thumb__main em {
+  width: 40%;
+  margin-top: 3px;
+  background: var(--p-accent);
+}
+
+.preset-thumb__main i {
+  width: 90%;
+  background: var(--p-text);
+  opacity: 0.35;
+}
+
+/* ---------- Colors ---------- */
+
+.swatch-row {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0.35rem;
+  margin-bottom: 0.65rem;
+}
+
+.swatch {
+  aspect-ratio: 1;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.12);
+  transition: transform 0.2s var(--ease);
+}
+
+.swatch:hover {
+  transform: scale(1.15);
+}
+
+.swatch.is-active {
+  border-color: var(--surface-2);
+  box-shadow: 0 0 0 2px var(--text);
+}
+
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 0.5rem;
+}
+
+.color-field {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+  padding: 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  transition: border-color 0.2s;
+}
+
+.color-field:focus-within {
+  border-color: var(--accent);
+}
+
+.color-field__swatch {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.15);
+  cursor: pointer;
+}
+
+.color-field__swatch input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.color-field__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.color-field__label {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+.color-field__hex {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: ui-monospace, monospace;
+  font-size: 12.5px;
+  text-transform: uppercase;
+  outline: none;
+}

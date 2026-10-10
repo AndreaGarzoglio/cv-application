@@ -24,3 +24,68 @@
   background-image: radial-gradient(var(--surface-3) 1px, transparent 1px);
   background-size: 22px 22px;
 }
+
+.workspace__editor {
+  display: flex;
+  flex-direction: column;
+}
+
+.workspace__panel {
+  flex: 1;
+  animation: fade-in 0.35s var(--ease);
+}
+
+/* ---------- Panel tabs ---------- */
+
+.panel-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 1rem 1rem 0;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.panel-tabs::before {
+  content: '';
+  position: absolute;
+  inset: -1rem -1rem auto;
+  height: calc(100% + 1rem);
+  z-index: -1;
+  background: var(--surface);
+}
+
+.panel-tabs__tab {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 34px;
+  border: 0;
+  background: none;
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color 0.25s;
+}
+
+.panel-tabs__tab.is-active {
+  color: var(--text);
+}
+
+.panel-tabs__indicator {
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  border-radius: 7px;
+  background: var(--surface-3);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
+  transition: transform 0.4s var(--ease);
+}

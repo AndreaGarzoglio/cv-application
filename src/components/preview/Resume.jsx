@@ -10,9 +10,9 @@ import {
 } from './ResumeBlocks.jsx'
 import RichText from './RichText.jsx'
 import { getStrings } from '../../data/locales.js'
+import { fontStack } from '../../data/fonts.js'
 import '../../styles/Resume.css'
 
-const fontStack = (font) => `'${font}', system-ui, sans-serif`
 
 function cssVariables(design) {
   const c = design.colors

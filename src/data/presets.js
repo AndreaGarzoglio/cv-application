@@ -1,0 +1,281 @@
+// Design keys a preset controls. Content-related settings (language,
+// date format, section order, photo visibility) are left untouched.
+export const PRESET_KEYS = [
+  'layout',
+  'sidebarWidth',
+  'colors',
+  'bodyFont',
+  'headingFont',
+  'fontSize',
+  'lineHeight',
+  'pageMargin',
+  'sectionGap',
+  'headingStyle',
+  'headingUppercase',
+  'photoShape',
+  'photoSize',
+  'skillStyle',
+  'languageStyle',
+  'interestStyle',
+  'entryLayout',
+  'showContactIcons',
+]
+
+const base = {
+  layout: 'left',
+  sidebarWidth: 34,
+  bodyFont: 'Inter',
+  headingFont: 'Inter',
+  fontSize: 13,
+  lineHeight: 1.5,
+  pageMargin: 36,
+  sectionGap: 24,
+  headingStyle: 'underline',
+  headingUppercase: true,
+  photoShape: 'circle',
+  photoSize: 128,
+  skillStyle: 'dots',
+  languageStyle: 'dots',
+  interestStyle: 'tags',
+  entryLayout: 'split',
+  showContactIcons: true,
+}
+
+export const BUILT_IN_PRESETS = [
+  {
+    id: 'midnight',
+    name: 'Midnight',
+    design: {
+      ...base,
+      colors: {
+        accent: '#38bdf8',
+        pageBg: '#ffffff',
+        text: '#334155',
+        heading: '#0f172a',
+        sidebarBg: '#0f1c2e',
+        sidebarText: '#cbd5e1',
+        sidebarHeading: '#ffffff',
+      },
+    },
+  },
+  {
+    id: 'emerald',
+    name: 'Emerald',
+    design: {
+      ...base,
+      bodyFont: 'Poppins',
+      headingFont: 'Poppins',
+      fontSize: 12.5,
+      headingStyle: 'bar',
+      photoShape: 'rounded',
+      skillStyle: 'bar',
+      languageStyle: 'bar',
+      colors: {
+        accent: '#10b981',
+        pageBg: '#ffffff',
+        text: '#374151',
+        heading: '#052e22',
+        sidebarBg: '#0b3b2e',
+        sidebarText: '#d1fae5',
+        sidebarHeading: '#ffffff',
+      },
+    },
+  },
+  {
+    id: 'classic',
+    name: 'Classic',
+    design: {
+      ...base,
+      layout: 'single',
+      bodyFont: 'Source Serif 4',
+      headingFont: 'Playfair Display',
+      fontSize: 13.5,
+      headingStyle: 'line',
+      photoShape: 'square',
+      photoSize: 110,
+      skillStyle: 'text',
+      languageStyle: 'text',
+      interestStyle: 'inline',
+      colors: {
+        accent: '#7c2d12',
+        pageBg: '#fffdf8',
+        text: '#3f3a36',
+        heading: '#1c1917',
+        sidebarBg: '#fffdf8',
+        sidebarText: '#3f3a36',
+        sidebarHeading: '#1c1917',
+      },
+    },
+  },
+  {
+    id: 'rose',
+    name: 'Rose',
+    design: {
+      ...base,
+      layout: 'right',
+      sidebarWidth: 32,
+      bodyFont: 'DM Sans',
+      headingFont: 'DM Serif Display',
+      headingUppercase: false,
+      headingStyle: 'accent',
+      skillStyle: 'segments',
+      languageStyle: 'segments',
+      colors: {
+        accent: '#e11d48',
+        pageBg: '#ffffff',
+        text: '#3f3f46',
+        heading: '#881337',
+        sidebarBg: '#fff1f2',
+        sidebarText: '#4c0519',
+        sidebarHeading: '#9f1239',
+      },
+    },
+  },
+  {
+    id: 'ocean',
+    name: 'Ocean',
+    design: {
+      ...base,
+      bodyFont: 'Montserrat',
+      headingFont: 'Montserrat',
+      fontSize: 12.5,
+      headingStyle: 'filled',
+      colors: {
+        accent: '#0891b2',
+        pageBg: '#ffffff',
+        text: '#334155',
+        heading: '#083344',
+        sidebarBg: '#083344',
+        sidebarText: '#cffafe',
+        sidebarHeading: '#ffffff',
+      },
+    },
+  },
+  {
+    id: 'sunset',
+    name: 'Sunset',
+    design: {
+      ...base,
+      layout: 'single',
+      bodyFont: 'Inter',
+      headingFont: 'Space Grotesk',
+      headingStyle: 'accent',
+      entryLayout: 'timeline',
+      skillStyle: 'tags',
+      photoShape: 'rounded',
+      colors: {
+        accent: '#ea580c',
+        pageBg: '#ffffff',
+        text: '#44403c',
+        heading: '#431407',
+        sidebarBg: '#ffffff',
+        sidebarText: '#44403c',
+        sidebarHeading: '#431407',
+      },
+    },
+  },
+  {
+    id: 'graphite',
+    name: 'Graphite',
+    design: {
+      ...base,
+      bodyFont: 'IBM Plex Sans',
+      headingFont: 'IBM Plex Sans',
+      headingStyle: 'line',
+      skillStyle: 'bar',
+      languageStyle: 'bar',
+      photoShape: 'square',
+      colors: {
+        accent: '#71717a',
+        pageBg: '#ffffff',
+        text: '#3f3f46',
+        heading: '#18181b',
+        sidebarBg: '#18181b',
+        sidebarText: '#d4d4d8',
+        sidebarHeading: '#fafafa',
+      },
+    },
+  },
+  {
+    id: 'lavender',
+    name: 'Lavender',
+    design: {
+      ...base,
+      bodyFont: 'Nunito',
+      headingFont: 'Nunito',
+      headingStyle: 'filled',
+      photoShape: 'rounded',
+      skillStyle: 'segments',
+      languageStyle: 'segments',
+      entryLayout: 'timeline',
+      colors: {
+        accent: '#7c3aed',
+        pageBg: '#ffffff',
+        text: '#3f3f46',
+        heading: '#2e1065',
+        sidebarBg: '#f5f3ff',
+        sidebarText: '#3b0764',
+        sidebarHeading: '#5b21b6',
+      },
+    },
+  },
+  {
+    id: 'minimal',
+    name: 'Minimal',
+    design: {
+      ...base,
+      layout: 'single',
+      headingStyle: 'plain',
+      entryLayout: 'stacked',
+      skillStyle: 'tags',
+      languageStyle: 'text',
+      interestStyle: 'inline',
+      sectionGap: 22,
+      colors: {
+        accent: '#111827',
+        pageBg: '#ffffff',
+        text: '#4b5563',
+        heading: '#111827',
+        sidebarBg: '#ffffff',
+        sidebarText: '#4b5563',
+        sidebarHeading: '#111827',
+      },
+    },
+  },
+  {
+    id: 'noir',
+    name: 'Noir',
+    design: {
+      ...base,
+      bodyFont: 'Inter',
+      headingFont: 'Space Grotesk',
+      colors: {
+        accent: '#facc15',
+        pageBg: '#121216',
+        text: '#c4c4cc',
+        heading: '#f4f4f5',
+        sidebarBg: '#1b1b21',
+        sidebarText: '#b4b4bd',
+        sidebarHeading: '#ffffff',
+      },
+    },
+  },
+]
+
+export function pickPresetDesign(design) {
+  return Object.fromEntries(
+    PRESET_KEYS.map((key) => [key, key === 'colors' ? { ...design.colors } : design[key]]),
+  )
+}
+
+export function applyPreset(design, preset) {
+  return { ...design, ...structuredClone(preset.design), presetId: preset.id }
+}
+
+export function matchesPreset(design, preset) {
+  return PRESET_KEYS.every((key) =>
+    key === 'colors'
+      ? Object.entries(preset.design.colors).every(([k, v]) => design.colors[k] === v)
+      : design[key] === preset.design[key],
+  )
+}
