@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { FaPenToSquare, FaPalette } from 'react-icons/fa6'
+import { FaEye, FaPenToSquare, FaPalette } from 'react-icons/fa6'
 import Topbar from './components/Topbar.jsx'
 import Editor from './components/editor/Editor.jsx'
 import CustomizePanel from './components/customize/CustomizePanel.jsx'
@@ -22,6 +22,7 @@ function App() {
   const [design, setDesign] = useLocalStorage('cv-builder:design', DEFAULT_DESIGN, mergeDesign)
   const [customPresets, setCustomPresets] = useLocalStorage('cv-builder:presets', [])
   const [tab, setTab] = useState('content')
+  const [mobileView, setMobileView] = useState('edit')
   const [toast, setToast] = useState(null)
   const notify = (message, type = 'success') => setToast({ id: Date.now(), message, type })
   const clearToast = useCallback(() => setToast(null), [])
@@ -73,7 +74,7 @@ function App() {
     <div className="app">
       <Topbar onDownload={downloadPdf} {...dataActions} />
       <Toast toast={toast} onDone={clearToast} />
-      <div className="workspace">
+      <div className={`workspace workspace--${mobileView}`}>
         <aside className="workspace__editor">
           <nav className="panel-tabs" role="tablist">
             {TABS.map(({ id, label, icon: Icon }) => (
@@ -113,6 +114,23 @@ function App() {
           </Preview>
         </main>
       </div>
+
+      <nav className="mobile-nav">
+        <button
+          type="button"
+          className={mobileView === 'edit' ? 'is-active' : undefined}
+          onClick={() => setMobileView('edit')}
+        >
+          <FaPenToSquare /> Edit
+        </button>
+        <button
+          type="button"
+          className={mobileView === 'preview' ? 'is-active' : undefined}
+          onClick={() => setMobileView('preview')}
+        >
+          <FaEye /> Preview
+        </button>
+      </nav>
     </div>
   )
 }

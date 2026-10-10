@@ -53,3 +53,9 @@
   margin: 0 0.2rem;
   background: var(--border-strong);
 }
+
+@media (max-width: 600px) {
+  .preview__stage {
+    margin: 16px auto 128px;
+  }
+}

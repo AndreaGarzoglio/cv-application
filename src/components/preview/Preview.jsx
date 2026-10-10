@@ -4,6 +4,7 @@ import { PAGE_WIDTH } from '../../data/design.js'
 import '../../styles/Preview.css'
 
 const GUTTER = 48
+const MOBILE_GUTTER = 12
 const MIN_ZOOM = 0.3
 const MAX_ZOOM = 2
 
@@ -20,7 +21,8 @@ function Preview({ children }) {
     return () => observer.disconnect()
   }, [])
 
-  const fitScale = clamp((available - GUTTER * 2) / PAGE_WIDTH, MIN_ZOOM, 1.2)
+  const gutter = available < 600 ? MOBILE_GUTTER : GUTTER
+  const fitScale = clamp((available - gutter * 2) / PAGE_WIDTH, 0.1, 1.2)
   const scale = zoom ?? fitScale
   const stepZoom = (delta) =>
     setZoom(clamp(Math.round((scale + delta) * 10) / 10, MIN_ZOOM, MAX_ZOOM))
