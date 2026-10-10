@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { flushSync } from 'react-dom'
 import { FaEye, FaPenToSquare, FaPalette } from 'react-icons/fa6'
 import Topbar from './components/Topbar.jsx'
 import Editor from './components/editor/Editor.jsx'
@@ -36,6 +37,9 @@ function App() {
     document.title = name ? `${name} - Resume` : 'Resume'
     window.addEventListener('afterprint', () => (document.title = previousTitle), { once: true })
     await document.fonts.ready
+    // The resume must be laid out (not hidden by the mobile editor view) so
+    // page breaks are computed before printing.
+    flushSync(() => setMobileView('preview'))
     window.print()
   }
 

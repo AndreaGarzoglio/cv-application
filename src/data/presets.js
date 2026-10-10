@@ -19,6 +19,10 @@ export const PRESET_KEYS = [
   'interestStyle',
   'entryLayout',
   'showContactIcons',
+  'photoRing',
+  'decoration',
+  'nameGradient',
+  'showSectionIcons',
 ]
 
 const base = {
@@ -39,16 +43,50 @@ const base = {
   interestStyle: 'tags',
   entryLayout: 'split',
   showContactIcons: true,
+  photoRing: false,
+  decoration: 'none',
+  nameGradient: false,
+  showSectionIcons: false,
 }
 
 export const BUILT_IN_PRESETS = [
+  {
+    id: 'nebula',
+    name: 'Nebula',
+    design: {
+      ...base,
+      sidebarWidth: 33,
+      headingFont: 'Space Grotesk',
+      headingStyle: 'short',
+      photoShape: 'hexagon',
+      photoRing: true,
+      decoration: 'orbs',
+      nameGradient: true,
+      showSectionIcons: true,
+      skillStyle: 'bar',
+      languageStyle: 'segments',
+      entryLayout: 'timeline',
+      colors: {
+        accent: '#a855f7',
+        accent2: '#e879f9',
+        pageBg: '#100d1f',
+        text: '#c8c4de',
+        heading: '#f5f3ff',
+        sidebarBg: '#1a1640',
+        sidebarText: '#c7c2ec',
+        sidebarHeading: '#ffffff',
+      },
+    },
+  },
   {
     id: 'midnight',
     name: 'Midnight',
     design: {
       ...base,
+      decoration: 'dots',
       colors: {
         accent: '#38bdf8',
+        accent2: '#818cf8',
         pageBg: '#ffffff',
         text: '#334155',
         heading: '#0f172a',
@@ -67,11 +105,13 @@ export const BUILT_IN_PRESETS = [
       headingFont: 'Poppins',
       fontSize: 12.5,
       headingStyle: 'bar',
-      photoShape: 'rounded',
+      photoShape: 'blob',
       skillStyle: 'bar',
       languageStyle: 'bar',
+      decoration: 'corner',
       colors: {
         accent: '#10b981',
+        accent2: '#84cc16',
         pageBg: '#ffffff',
         text: '#374151',
         heading: '#052e22',
@@ -98,6 +138,7 @@ export const BUILT_IN_PRESETS = [
       interestStyle: 'inline',
       colors: {
         accent: '#7c2d12',
+        accent2: '#7c2d12',
         pageBg: '#fffdf8',
         text: '#3f3a36',
         heading: '#1c1917',
@@ -117,11 +158,14 @@ export const BUILT_IN_PRESETS = [
       bodyFont: 'DM Sans',
       headingFont: 'DM Serif Display',
       headingUppercase: false,
-      headingStyle: 'accent',
+      headingStyle: 'dot',
+      photoShape: 'arch',
       skillStyle: 'segments',
       languageStyle: 'segments',
+      decoration: 'orbs',
       colors: {
         accent: '#e11d48',
+        accent2: '#f472b6',
         pageBg: '#ffffff',
         text: '#3f3f46',
         heading: '#881337',
@@ -140,8 +184,11 @@ export const BUILT_IN_PRESETS = [
       headingFont: 'Montserrat',
       fontSize: 12.5,
       headingStyle: 'filled',
+      decoration: 'wave',
+      showSectionIcons: true,
       colors: {
         accent: '#0891b2',
+        accent2: '#2563eb',
         pageBg: '#ffffff',
         text: '#334155',
         heading: '#083344',
@@ -162,9 +209,12 @@ export const BUILT_IN_PRESETS = [
       headingStyle: 'accent',
       entryLayout: 'timeline',
       skillStyle: 'tags',
-      photoShape: 'rounded',
+      photoShape: 'arch',
+      decoration: 'diagonal',
+      nameGradient: true,
       colors: {
         accent: '#ea580c',
+        accent2: '#e11d48',
         pageBg: '#ffffff',
         text: '#44403c',
         heading: '#431407',
@@ -187,6 +237,7 @@ export const BUILT_IN_PRESETS = [
       photoShape: 'square',
       colors: {
         accent: '#71717a',
+        accent2: '#71717a',
         pageBg: '#ffffff',
         text: '#3f3f46',
         heading: '#18181b',
@@ -204,12 +255,15 @@ export const BUILT_IN_PRESETS = [
       bodyFont: 'Nunito',
       headingFont: 'Nunito',
       headingStyle: 'filled',
-      photoShape: 'rounded',
+      photoShape: 'hexagon',
       skillStyle: 'segments',
       languageStyle: 'segments',
       entryLayout: 'timeline',
+      decoration: 'dots',
+      photoRing: true,
       colors: {
         accent: '#7c3aed',
+        accent2: '#db2777',
         pageBg: '#ffffff',
         text: '#3f3f46',
         heading: '#2e1065',
@@ -233,6 +287,7 @@ export const BUILT_IN_PRESETS = [
       sectionGap: 22,
       colors: {
         accent: '#111827',
+        accent2: '#111827',
         pageBg: '#ffffff',
         text: '#4b5563',
         heading: '#111827',
@@ -249,8 +304,12 @@ export const BUILT_IN_PRESETS = [
       ...base,
       bodyFont: 'Inter',
       headingFont: 'Space Grotesk',
+      decoration: 'corner',
+      photoShape: 'rounded',
+      photoRing: true,
       colors: {
         accent: '#facc15',
+        accent2: '#fb923c',
         pageBg: '#121216',
         text: '#c4c4cc',
         heading: '#f4f4f5',
@@ -269,13 +328,17 @@ export function pickPresetDesign(design) {
 }
 
 export function applyPreset(design, preset) {
-  return { ...design, ...structuredClone(preset.design), presetId: preset.id }
+  const next = structuredClone(preset.design)
+  // Presets saved before the secondary accent existed fall back to the accent.
+  const colors = { accent2: next.colors.accent, ...next.colors }
+  return { ...design, ...next, colors, presetId: preset.id }
 }
 
 export function matchesPreset(design, preset) {
-  return PRESET_KEYS.every((key) =>
-    key === 'colors'
-      ? Object.entries(preset.design.colors).every(([k, v]) => design.colors[k] === v)
-      : design[key] === preset.design[key],
-  )
+  return PRESET_KEYS.every((key) => {
+    const value = preset.design[key]
+    if (value === undefined) return true // key added after the preset was saved
+    if (key === 'colors') return Object.entries(value).every(([k, v]) => design.colors[k] === v)
+    return design[key] === value
+  })
 }

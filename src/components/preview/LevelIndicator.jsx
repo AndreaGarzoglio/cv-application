@@ -18,7 +18,7 @@ function LevelIndicator({ level, variant, labels }) {
   return (
     <span className={`cv-level cv-level--${variant}`} title={levelLabel(labels, level)}>
       {labels.map((label, i) => (
-        <span key={label} className={i < level ? 'is-on' : undefined} />
+        <span key={label} className={i < level ? 'is-on' : undefined} style={{ '--i': i }} />
       ))}
     </span>
   )

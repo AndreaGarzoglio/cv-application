@@ -13,6 +13,7 @@ export function PresetThumb({ design }) {
         '--p-side': c.sidebarBg,
         '--p-side-text': c.sidebarText,
         '--p-accent': c.accent,
+        '--p-accent-2': c.accent2 ?? c.accent,
         '--p-heading': c.heading,
         '--p-text': c.text,
       }}

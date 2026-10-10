@@ -84,19 +84,20 @@
     transition: none;
   }
 
-  /* Repeat column padding at the top of every printed page. */
-  body .cv-sidebar,
-  body .cv-main {
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
+  /* Gradient text leaves a hairline box in some PDF renderers. */
+  body .cv-name--gradient {
+    background: none;
+    color: var(--cv-accent);
   }
 
-  body .cv-section__title {
-    break-after: avoid;
-  }
-
+  /* The preview already pushes these blocks past page breaks (and adds the
+     top margin of the next page); this only guards against rounding. */
+  body .cv-section__title,
+  body .cv-entry__header,
+  body .cv-rich > p,
+  body .cv-bullets > li,
   body .cv-levels__item,
-  body .cv-skill-group,
+  body .cv-tags,
   body .cv-contacts li {
     break-inside: avoid;
   }

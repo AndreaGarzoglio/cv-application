@@ -175,7 +175,7 @@
   height: 16px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--p-accent);
+  background: linear-gradient(135deg, var(--p-accent), var(--p-accent-2));
   opacity: 0.85;
 }
 
@@ -202,7 +202,7 @@
 .preset-thumb__main em {
   width: 40%;
   margin-top: 3px;
-  background: var(--p-accent);
+  background: linear-gradient(90deg, var(--p-accent), var(--p-accent-2));
 }
 
 .preset-thumb__main i {
@@ -387,6 +387,8 @@
 .heading-card {
   --h-color: var(--text);
   --h-accent: var(--accent);
+  --h-accent-2: #e879f9;
+  --h-gradient: linear-gradient(90deg, var(--h-accent), var(--h-accent-2));
   --cv-page-bg: #0b0a1a;
   padding: 0.65rem 0.75rem;
   border: 1px solid var(--border);
@@ -416,7 +418,8 @@
   text-transform: uppercase;
 }
 
-.heading-card.cv-h--line .cv-section__title {
+.heading-card.cv-h--line .cv-section__title,
+.heading-card.cv-h--dot .cv-section__title {
   display: flex;
 }
 
@@ -486,4 +489,57 @@
   font-size: 12px;
   text-align: center;
   color: var(--text-faint);
+}
+
+/* ---------- Shape & decoration pickers ---------- */
+
+.shape-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.option-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 12px;
+  color: var(--text-muted);
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    transform 0.25s var(--ease);
+}
+
+.option-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.option-card.is-active {
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.shape-preview {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--accent), #e879f9);
+}
+
+.decor-thumb {
+  position: relative;
+  display: block;
+  width: 794px;
+  height: 1123px;
+  overflow: hidden;
+  border-radius: 40px;
+  box-shadow: 0 0 0 10px rgb(255 255 255 / 0.08);
+  zoom: 0.07;
 }

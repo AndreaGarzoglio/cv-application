@@ -2,6 +2,8 @@ import Switch from '../ui/Switch.jsx'
 
 const STYLES = [
   { value: 'underline', label: 'Underline' },
+  { value: 'short', label: 'Short bar' },
+  { value: 'dot', label: 'Dot' },
   { value: 'line', label: 'Line' },
   { value: 'bar', label: 'Side bar' },
   { value: 'filled', label: 'Filled' },
@@ -28,6 +30,11 @@ function HeadingSettings({ design, set }) {
           </button>
         ))}
       </div>
+      <Switch
+        label="Section icons"
+        checked={design.showSectionIcons}
+        onChange={(showSectionIcons) => set({ showSectionIcons })}
+      />
       <Switch
         label="Uppercase headings"
         checked={design.headingUppercase}

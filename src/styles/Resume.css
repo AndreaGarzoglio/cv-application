@@ -55,6 +55,8 @@
 }
 
 .resume__inner {
+  position: relative;
+  z-index: 1;
   display: grid;
 }
 
@@ -124,16 +126,26 @@
 }
 
 .cv-photo {
-  width: var(--cv-photo);
-  height: var(--cv-photo);
+  width: min(var(--cv-photo), 100%);
+  aspect-ratio: 1;
   flex-shrink: 0;
+}
+
+.cv-photo img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  border-radius: inherit;
+  clip-path: inherit;
 }
 
 .cv-sidebar .cv-photo {
-  max-width: 100%;
-  max-height: calc(794px * 0.5);
   align-self: center;
+}
+
+.cv-photo--ring {
+  padding: 4px;
+  background: linear-gradient(135deg, var(--cv-accent), var(--cv-accent-2));
 }
 
 .cv-photo--circle {
@@ -146,6 +158,27 @@
 
 .cv-photo--square {
   border-radius: 0;
+}
+
+.cv-photo--blob {
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+}
+
+.cv-photo--arch {
+  border-radius: 50% 50% 8% 8% / 50% 50% 8% 8%;
+}
+
+.cv-photo--hexagon {
+  clip-path: polygon(50% 0, 93.3% 25%, 93.3% 75%, 50% 100%, 6.7% 75%, 6.7% 25%);
+}
+
+/* ---------- Gradient name ---------- */
+
+.cv-name--gradient {
+  background: linear-gradient(90deg, var(--cv-accent), var(--cv-accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 /* ---------- Page guides (screen only) ---------- */
@@ -172,14 +205,18 @@
 
 /* ---------- Sections & headings ---------- */
 
+.resume {
+  --h-accent: var(--cv-accent);
+  --h-accent-2: var(--cv-accent-2);
+  --h-gradient: linear-gradient(90deg, var(--h-accent), var(--h-accent-2));
+}
+
 .cv-main {
   --h-color: var(--cv-heading);
-  --h-accent: var(--cv-accent);
 }
 
 .cv-sidebar {
   --h-color: var(--cv-side-heading);
-  --h-accent: var(--cv-accent);
 }
 
 .cv-section {
@@ -206,8 +243,8 @@
 }
 
 .cv-h--underline .cv-section__title {
-  padding-bottom: 0.4em;
-  border-bottom: 2px solid var(--h-accent);
+  padding-bottom: 0.45em;
+  background: var(--h-gradient) left bottom / 100% 2px no-repeat;
 }
 
 .cv-h--line .cv-section__title {
@@ -226,15 +263,52 @@
 
 .cv-h--bar .cv-section__title {
   padding-left: 0.7em;
-  border-left: 4px solid var(--h-accent);
+  border-left: 4px solid;
+  border-image: linear-gradient(var(--h-accent), var(--h-accent-2)) 1;
 }
 
 .cv-h--filled .cv-section__title span {
   display: inline-block;
   padding: 0.2em 0.7em;
   border-radius: 4px;
-  background: var(--h-accent);
+  background: var(--h-gradient);
   color: var(--cv-page-bg);
+}
+
+.cv-h--short .cv-section__title::after {
+  content: '';
+  display: block;
+  width: 2.4em;
+  height: 3px;
+  margin-top: 0.45em;
+  border-radius: 3px;
+  background: var(--h-gradient);
+}
+
+.cv-h--dot .cv-section__title {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+
+.cv-h--dot .cv-section__title::before {
+  content: '';
+  width: 0.6em;
+  height: 0.6em;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--h-gradient);
+}
+
+.cv-section__icon {
+  margin-right: 0.55em;
+  color: var(--h-accent);
+  vertical-align: -0.12em;
+}
+
+.cv-h--filled .cv-section__icon,
+.cv-h--accent .cv-section__icon {
+  color: inherit;
 }
 
 .cv-h--accent .cv-section__title {
@@ -336,7 +410,8 @@
   width: 0.6em;
   height: 0.6em;
   border-radius: 50%;
-  background: var(--h-accent);
+  /* Each step drifts from the accent towards the secondary accent. */
+  background: color-mix(in srgb, var(--h-accent-2) calc(var(--i) * 25%), var(--h-accent));
   opacity: 0.22;
 }
 
@@ -372,7 +447,7 @@
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--h-accent);
+  background: var(--h-gradient);
 }
 
 .cv-level--text {
@@ -462,7 +537,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.4em;
-  break-inside: avoid;
 }
 
 .cv-entry__header {
@@ -527,7 +601,12 @@
 .cv-entries--timeline .cv-entry {
   position: relative;
   padding: 0 0 1.1em 1.4em;
-  border-left: 2px solid color-mix(in srgb, var(--h-accent) 30%, transparent);
+  border-left: 2px solid;
+  border-image: linear-gradient(
+      color-mix(in srgb, var(--h-accent) 45%, transparent),
+      color-mix(in srgb, var(--h-accent-2) 45%, transparent)
+    )
+    1;
 }
 
 .cv-entries--timeline .cv-entry:last-child {
@@ -545,6 +624,7 @@
   border: 2px solid var(--h-accent);
   border-radius: 50%;
   background: var(--cv-page-bg);
+  z-index: 1;
 }
 
 .cv-entry__grade {
@@ -576,4 +656,82 @@
 
 .cv-main .cv-levels:not(.cv-levels--bar) .cv-levels__head {
   flex: 1;
+}
+
+/* ---------- Decorations (first page, behind the content) ---------- */
+
+.cv-decor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1123px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cv-decor::before,
+.cv-decor::after {
+  content: '';
+  position: absolute;
+}
+
+.cv-decor--orbs {
+  background:
+    radial-gradient(
+      circle 380px at 100% 0%,
+      color-mix(in srgb, var(--cv-accent) 26%, transparent),
+      transparent
+    ),
+    radial-gradient(
+      circle 300px at 0% 100%,
+      color-mix(in srgb, var(--cv-accent-2) 18%, transparent),
+      transparent
+    );
+}
+
+.cv-decor--dots::before {
+  top: 18px;
+  right: 18px;
+  width: 230px;
+  height: 230px;
+  background: radial-gradient(var(--cv-accent) 1.6px, transparent 1.8px) 0 0 / 14px 14px;
+  opacity: 0.45;
+  mask-image: radial-gradient(circle at 100% 0%, #000 20%, transparent 70%);
+}
+
+.cv-decor--corner::before {
+  top: -150px;
+  right: -150px;
+  width: 360px;
+  height: 360px;
+  border: 2px solid var(--cv-accent);
+  border-radius: 50%;
+  opacity: 0.35;
+}
+
+.cv-decor--corner::after {
+  top: -70px;
+  right: -70px;
+  width: 190px;
+  height: 190px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cv-accent), var(--cv-accent-2));
+  opacity: 0.16;
+}
+
+.cv-decor--wave::before {
+  inset: 0 0 auto;
+  height: 170px;
+  background: linear-gradient(90deg, var(--cv-accent), var(--cv-accent-2));
+  opacity: 0.16;
+  clip-path: path('M0 0 H794 V112 C 640 170, 420 70, 230 118 C 130 142, 60 150, 0 132 Z');
+}
+
+.cv-decor--diagonal::before {
+  inset: 0 0 auto;
+  height: 230px;
+  background: linear-gradient(110deg, var(--cv-accent), var(--cv-accent-2));
+  opacity: 0.15;
+  clip-path: polygon(0 0, 100% 0, 100% 42%, 0 100%);
 }

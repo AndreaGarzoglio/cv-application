@@ -4,11 +4,14 @@ import LevelIndicator from './LevelIndicator.jsx'
 import { LANGUAGE_LEVELS, SKILL_LEVELS } from '../../data/levels.js'
 import { contactHref, displayValue, getPlatform } from '../../data/platforms.js'
 
-export function ResumeSection({ title, className = '', children }) {
+export function ResumeSection({ title, icon: Icon, className = '', children }) {
   return (
     <section className={`cv-section ${className}`}>
       <h2 className="cv-section__title">
-        <span>{title}</span>
+        <span>
+          {Icon && <Icon className="cv-section__icon" aria-hidden="true" />}
+          {title}
+        </span>
       </h2>
       {children}
     </section>

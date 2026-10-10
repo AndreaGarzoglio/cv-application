@@ -25,7 +25,22 @@ function ColorSettings({ design, onColors }) {
             />
           ))}
         </div>
-        <ColorField label="Custom accent" value={c.accent} onChange={(accent) => onColors({ accent })} />
+        <div className="color-grid">
+          <ColorField label="Accent" value={c.accent} onChange={(accent) => onColors({ accent })} />
+          <ColorField
+            label="Second accent"
+            value={c.accent2}
+            onChange={(accent2) => onColors({ accent2 })}
+          />
+        </div>
+        <p className="hint">
+          Gradients blend the two accents.{' '}
+          {c.accent2 !== c.accent && (
+            <button type="button" className="link-btn" onClick={() => onColors({ accent2: c.accent })}>
+              Use one color only
+            </button>
+          )}
+        </p>
       </div>
 
       <div>

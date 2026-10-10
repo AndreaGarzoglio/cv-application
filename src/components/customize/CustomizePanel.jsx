@@ -3,6 +3,7 @@ import {
   FaFont,
   FaHeading,
   FaListCheck,
+  FaShapes,
   FaPalette,
   FaRulerCombined,
   FaSwatchbook,
@@ -16,6 +17,7 @@ import TypographySettings from './TypographySettings.jsx'
 import HeadingSettings from './HeadingSettings.jsx'
 import PhotoSettings from './PhotoSettings.jsx'
 import DisplaySettings from './DisplaySettings.jsx'
+import DecorationSettings from './DecorationSettings.jsx'
 import RangeField from '../ui/RangeField.jsx'
 import { applyPreset } from '../../data/presets.js'
 import '../../styles/Customize.css'
@@ -39,6 +41,9 @@ function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, re
       </EditorSection>
       <EditorSection icon={FaPalette} title="Colors">
         <ColorSettings design={design} onColors={onColors} />
+      </EditorSection>
+      <EditorSection icon={FaShapes} title="Shapes & effects">
+        <DecorationSettings design={design} set={set} />
       </EditorSection>
       <EditorSection icon={FaFont} title="Typography">
         <TypographySettings design={design} set={set} />
