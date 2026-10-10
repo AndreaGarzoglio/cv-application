@@ -14,7 +14,6 @@ import { fontStack } from '../../data/fonts.js'
 import { sectionTitle } from '../../data/sampleResume.js'
 import '../../styles/Resume.css'
 
-
 function cssVariables(design) {
   const c = design.colors
   return {
@@ -70,6 +69,7 @@ function usePageCount() {
     const observer = new ResizeObserver(() => {
       const outer = outerRef.current.getBoundingClientRect()
       const inner = innerRef.current.getBoundingClientRect()
+      if (outer.width === 0) return // preview hidden (mobile edit view)
       // Ratio-based so the result is independent of the preview zoom.
       const height = (inner.height / outer.width) * PAGE_WIDTH
       setPages(Math.max(1, Math.ceil((height - 1) / PAGE_HEIGHT)))
@@ -140,7 +140,7 @@ function Resume({ resume, design }) {
             getHeading={(e) => ({
               title: e.degree,
               subtitle: e.school,
-              extra: e.grade.trim() && (
+              extra: e.grade?.trim() && (
                 <p className="cv-entry__grade">
                   {getStrings(design.resumeLanguage).grade}: <strong>{e.grade}</strong>
                 </p>

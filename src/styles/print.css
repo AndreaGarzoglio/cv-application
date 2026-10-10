@@ -7,6 +7,10 @@
 }
 
 @media print {
+  :root {
+    color-scheme: light;
+  }
+
   html,
   body,
   body #root,

@@ -124,7 +124,7 @@
   display: none;
 }
 
-@media (max-width: 900px) {
+@media screen and (max-width: 900px) {
   .workspace {
     grid-template-columns: 1fr;
   }
@@ -181,7 +181,7 @@
   }
 }
 
-@media (max-width: 520px) {
+@media screen and (max-width: 520px) {
   .topbar {
     padding: 0 0.75rem;
   }
