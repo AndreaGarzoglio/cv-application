@@ -6,7 +6,7 @@ assignment from The Odin Project and grew into a full builder inspired by FlowCV
 
 Edit your content on the left and watch an A4 preview update live on the right.
 
-**Live demo:** published on Vercel, link coming soon.
+**Live demo:** [cv-application-neon-three.vercel.app](https://cv-application-neon-three.vercel.app/) (hosted on Vercel)
 
 ## Features
 
