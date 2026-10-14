@@ -23,8 +23,8 @@ Edit your content on the left and watch an A4 preview update live on the right.
 
 **Customization**
 
-- 11 built-in presets, all editable, plus your own saved presets. The default,
-  Nebula, is a dark theme in violet, indigo and magenta
+- 12 built-in presets, all editable, plus your own saved presets. The default,
+  Twilight, is a dark theme with muted indigo-violet and magenta accents
 - Sidebar left / sidebar right / one-column layouts with adjustable sidebar width
 - Section order, including moving sections between columns
 - Full color control: two accents blended into gradients, page and sidebar colors

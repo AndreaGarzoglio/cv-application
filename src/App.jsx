@@ -63,8 +63,9 @@ function App() {
       }
     },
     onLoadSample() {
-      if (!confirm('Replace your current content with the example resume?')) return
+      if (!confirm('Replace your current content and design with the example resume?')) return
       setResume(createSampleResume())
+      setDesign(structuredClone(DEFAULT_DESIGN))
       notify('Example loaded')
     },
     onClear() {

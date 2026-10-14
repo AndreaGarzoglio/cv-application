@@ -542,6 +542,8 @@
 .cv-entry__header {
   display: flex;
   justify-content: space-between;
+  /* The dates are smaller than the title: line them up on the text. */
+  align-items: baseline;
   gap: 1em;
 }
 
@@ -579,6 +581,7 @@
 
 .cv-entries--stacked .cv-entry__header {
   flex-direction: column;
+  align-items: stretch;
   gap: 0.15em;
 }
 

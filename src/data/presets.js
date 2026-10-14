@@ -51,6 +51,28 @@ const base = {
 
 export const BUILT_IN_PRESETS = [
   {
+    id: 'twilight',
+    name: 'Twilight',
+    design: {
+      ...base,
+      headingFont: 'Raleway',
+      decoration: 'corner',
+      photoShape: 'blob',
+      photoSize: 156,
+      interestStyle: 'list',
+      colors: {
+        accent: '#6e76e7',
+        accent2: '#e25a95',
+        pageBg: '#11131b',
+        text: '#c5c3d0',
+        heading: '#e3def5',
+        sidebarBg: '#1a1d29',
+        sidebarText: '#b4b1c4',
+        sidebarHeading: '#ed82b0',
+      },
+    },
+  },
+  {
     id: 'nebula',
     name: 'Nebula',
     design: {
