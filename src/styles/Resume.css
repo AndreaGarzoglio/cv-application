@@ -1,9 +1,13 @@
 .resume {
+  --cv-sheet: var(--cv-page-bg);
+  --h-accent: var(--cv-accent);
+  --h-accent-2: var(--cv-accent-2);
+  --h-gradient: linear-gradient(90deg, var(--h-accent), var(--h-accent-2));
   position: relative;
   width: 794px;
   overflow: hidden;
   border-radius: 4px;
-  background: var(--cv-page-bg);
+  background: var(--cv-sheet);
   box-shadow:
     0 30px 60px -20px rgb(0 0 0 / 0.7),
     0 0 0 1px rgb(255 255 255 / 0.04);
@@ -16,20 +20,18 @@
   transition: background 0.3s;
 }
 
-.resume--left {
-  background: linear-gradient(
-    to right,
+/* Page background with the sidebar column; print.css repeats it on every sheet. */
+.resume--left,
+.resume--right {
+  --cv-sheet: linear-gradient(
+    to var(--cv-side-dir, right),
     var(--cv-side-bg) 0 var(--cv-side-w),
     var(--cv-page-bg) var(--cv-side-w)
   );
 }
 
 .resume--right {
-  background: linear-gradient(
-    to left,
-    var(--cv-side-bg) 0 var(--cv-side-w),
-    var(--cv-page-bg) var(--cv-side-w)
-  );
+  --cv-side-dir: left;
 }
 
 .resume *,
@@ -74,20 +76,22 @@
 
 /* ---------- Columns ---------- */
 
-.cv-sidebar {
-  display: flex;
-  flex-direction: column;
-  gap: var(--cv-gap);
-  min-width: 0;
-  padding: var(--cv-pad) calc(var(--cv-pad) * 0.75);
-  color: var(--cv-side-text);
-}
-
+.cv-sidebar,
 .cv-main {
   display: flex;
   flex-direction: column;
   gap: var(--cv-gap);
   min-width: 0;
+}
+
+.cv-sidebar {
+  --h-color: var(--cv-side-heading);
+  padding: var(--cv-pad) calc(var(--cv-pad) * 0.75);
+  color: var(--cv-side-text);
+}
+
+.cv-main {
+  --h-color: var(--cv-heading);
   padding: var(--cv-pad);
 }
 
@@ -156,10 +160,6 @@
   border-radius: 16%;
 }
 
-.cv-photo--square {
-  border-radius: 0;
-}
-
 .cv-photo--blob {
   border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
 }
@@ -204,20 +204,6 @@
 }
 
 /* ---------- Sections & headings ---------- */
-
-.resume {
-  --h-accent: var(--cv-accent);
-  --h-accent-2: var(--cv-accent-2);
-  --h-gradient: linear-gradient(90deg, var(--h-accent), var(--h-accent-2));
-}
-
-.cv-main {
-  --h-color: var(--cv-heading);
-}
-
-.cv-sidebar {
-  --h-color: var(--cv-side-heading);
-}
 
 .cv-section {
   display: flex;
@@ -306,8 +292,7 @@
   vertical-align: -0.12em;
 }
 
-.cv-h--filled .cv-section__icon,
-.cv-h--accent .cv-section__icon {
+.cv-h--filled .cv-section__icon {
   color: inherit;
 }
 
@@ -349,10 +334,6 @@
 
 .cv-header__text {
   min-width: 0;
-}
-
-.cv-header .cv-contacts {
-  --h-accent: var(--cv-accent);
 }
 
 /* ---------- Levels (languages & skills) ---------- */
@@ -500,7 +481,6 @@
   display: flex;
   flex-direction: column;
   gap: 0.25em;
-  margin: 0;
   padding-left: 1.1em;
 }
 
@@ -641,16 +621,15 @@
 
 /* ---------- Short lists in the wide main column spread across columns ---------- */
 
-.cv-main .cv-skill-groups {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-  gap: 1em 2.5em;
-}
-
+.cv-main .cv-skill-groups,
 .cv-main .cv-section > .cv-levels {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
   gap: 0.6em 2.5em;
+}
+
+.cv-main .cv-skill-groups {
+  row-gap: 1em;
 }
 
 .cv-main .cv-levels__item {
@@ -665,9 +644,7 @@
 
 .cv-decor {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  inset: 0 0 auto;
   height: 1123px;
   overflow: hidden;
   pointer-events: none;

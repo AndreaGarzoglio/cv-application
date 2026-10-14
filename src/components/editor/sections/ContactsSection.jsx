@@ -4,7 +4,7 @@ import EditorSection from '../EditorSection.jsx'
 import PlatformMenu from '../PlatformMenu.jsx'
 import ItemActions from '../../ui/ItemActions.jsx'
 import { getPlatform } from '../../../data/platforms.js'
-import { moveItem, removeItem, uid, updateItem } from '../../../utils/list.js'
+import { rowProps, uid } from '../../../utils/list.js'
 
 function ContactRow({ contact, autoFocus, onChange, ...actions }) {
   const platform = getPlatform(contact.platform)
@@ -13,7 +13,6 @@ function ContactRow({ contact, autoFocus, onChange, ...actions }) {
   return (
     <li className="item-row">
       <PlatformMenu
-        className="item-row__menu"
         selected={contact.platform}
         onSelect={(id) => onChange({ platform: id })}
         renderTrigger={({ open, toggle }) => (
@@ -60,11 +59,7 @@ function ContactsSection({ contacts, onChange, sectionProps }) {
               key={contact.id}
               contact={contact}
               autoFocus={contact.id === lastAdded}
-              isFirst={i === 0}
-              isLast={i === contacts.length - 1}
-              onChange={(patch) => onChange(updateItem(contacts, contact.id, patch))}
-              onMove={(dir) => onChange(moveItem(contacts, contact.id, dir))}
-              onRemove={() => onChange(removeItem(contacts, contact.id))}
+              {...rowProps(contacts, i, onChange)}
             />
           ))}
         </ul>

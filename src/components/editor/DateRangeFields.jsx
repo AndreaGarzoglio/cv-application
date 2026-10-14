@@ -26,7 +26,7 @@ function DateRangeFields({ entry, onChange, currentLabel }) {
       )}
       <Switch
         label={currentLabel}
-        checked={entry.current}
+        value={entry.current}
         onChange={(current) => onChange({ current })}
       />
     </>

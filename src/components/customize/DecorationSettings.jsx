@@ -1,3 +1,4 @@
+import Segmented from '../ui/Segmented.jsx'
 import Switch from '../ui/Switch.jsx'
 
 const DECORATIONS = [
@@ -9,22 +10,20 @@ const DECORATIONS = [
   { value: 'diagonal', label: 'Diagonal' },
 ]
 
-function DecorationSettings({ design, set }) {
+function DecorationSettings({ design, bind }) {
   const c = design.colors
   return (
     <div className="field-stack">
       <div>
         <p className="settings-label">Background shapes</p>
-        <div className="shape-grid" role="radiogroup" aria-label="Background shapes">
-          {DECORATIONS.map((decor) => (
-            <button
-              key={decor.value}
-              type="button"
-              role="radio"
-              aria-checked={design.decoration === decor.value}
-              className={`option-card${design.decoration === decor.value ? ' is-active' : ''}`}
-              onClick={() => set({ decoration: decor.value })}
-            >
+        <Segmented
+          label="Background shapes"
+          className="shape-grid"
+          optionClass="option-card"
+          options={DECORATIONS}
+          {...bind('decoration')}
+          renderOption={(decor) => (
+            <>
               {/* A real page with the real decoration, zoomed down to a thumbnail. */}
               <span
                 className="decor-thumb"
@@ -33,15 +32,11 @@ function DecorationSettings({ design, set }) {
                 {decor.value !== 'none' && <span className={`cv-decor cv-decor--${decor.value}`} />}
               </span>
               {decor.label}
-            </button>
-          ))}
-        </div>
+            </>
+          )}
+        />
       </div>
-      <Switch
-        label="Gradient name"
-        checked={design.nameGradient}
-        onChange={(nameGradient) => set({ nameGradient })}
-      />
+      <Switch label="Gradient name" {...bind('nameGradient')} />
     </div>
   )
 }

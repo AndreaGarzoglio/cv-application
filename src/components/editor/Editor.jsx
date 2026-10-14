@@ -26,47 +26,25 @@ function Editor({ resume, onChange }) {
       ),
   })
 
+  // Wires a section to its resume field and to its title and visibility controls.
+  const bind = (field, key = field) => ({
+    onChange: (value) => onChange(field, value),
+    sectionProps: sectionProps(key),
+  })
+
   return (
     <div className="editor">
       <h2 className="editor__group-label">Info</h2>
       <PersonalSection personal={resume.personal} onChange={(v) => onChange('personal', v)} />
-      <ContactsSection
-        contacts={resume.contacts}
-        onChange={(v) => onChange('contacts', v)}
-        sectionProps={sectionProps('contacts')}
-      />
-      <LanguagesSection
-        languages={resume.languages}
-        onChange={(v) => onChange('languages', v)}
-        sectionProps={sectionProps('languages')}
-      />
-      <SkillsSection
-        categories={resume.skillCategories}
-        onChange={(v) => onChange('skillCategories', v)}
-        sectionProps={sectionProps('skills')}
-      />
-      <InterestsSection
-        interests={resume.interests}
-        onChange={(v) => onChange('interests', v)}
-        sectionProps={sectionProps('interests')}
-      />
+      <ContactsSection contacts={resume.contacts} {...bind('contacts')} />
+      <LanguagesSection languages={resume.languages} {...bind('languages')} />
+      <SkillsSection categories={resume.skillCategories} {...bind('skillCategories', 'skills')} />
+      <InterestsSection interests={resume.interests} {...bind('interests')} />
 
       <h2 className="editor__group-label">Main</h2>
-      <ProfileSection
-        profile={resume.profile}
-        onChange={(v) => onChange('profile', v)}
-        sectionProps={sectionProps('profile')}
-      />
-      <ExperienceSection
-        experience={resume.experience}
-        onChange={(v) => onChange('experience', v)}
-        sectionProps={sectionProps('experience')}
-      />
-      <EducationSection
-        education={resume.education}
-        onChange={(v) => onChange('education', v)}
-        sectionProps={sectionProps('education')}
-      />
+      <ProfileSection profile={resume.profile} {...bind('profile')} />
+      <ExperienceSection entries={resume.experience} {...bind('experience')} />
+      <EducationSection entries={resume.education} {...bind('education')} />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { FaExpand, FaMagnifyingGlassMinus, FaMagnifyingGlassPlus } from 'react-icons/fa6'
+import IconButton from '../ui/IconButton.jsx'
 import { PAGE_WIDTH } from '../../data/design.js'
 import '../../styles/Preview.css'
 
@@ -36,34 +37,21 @@ function Preview({ children }) {
       </div>
 
       <div className="preview__toolbar">
-        <button
-          type="button"
-          className="icon-btn"
-          title="Zoom out"
-          disabled={scale <= MIN_ZOOM}
-          onClick={() => stepZoom(-0.1)}
-        >
+        <IconButton title="Zoom out" disabled={scale <= MIN_ZOOM} onClick={() => stepZoom(-0.1)}>
           <FaMagnifyingGlassMinus size={13} />
-        </button>
+        </IconButton>
         <span className="preview__zoom-value">{Math.round(scale * 100)}%</span>
-        <button
-          type="button"
-          className="icon-btn"
-          title="Zoom in"
-          disabled={scale >= MAX_ZOOM}
-          onClick={() => stepZoom(0.1)}
-        >
+        <IconButton title="Zoom in" disabled={scale >= MAX_ZOOM} onClick={() => stepZoom(0.1)}>
           <FaMagnifyingGlassPlus size={13} />
-        </button>
+        </IconButton>
         <span className="preview__divider" />
-        <button
-          type="button"
-          className={`icon-btn${zoom === null ? ' is-active' : ''}`}
+        <IconButton
+          className={zoom === null ? 'is-active' : ''}
           title="Fit to width"
           onClick={() => setZoom(null)}
         >
           <FaExpand size={13} />
-        </button>
+        </IconButton>
       </div>
     </div>
   )

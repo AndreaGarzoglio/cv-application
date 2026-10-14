@@ -14,49 +14,38 @@ const ENTRY_LAYOUTS = [
   { value: 'timeline', label: 'Timeline' },
 ]
 
-function LayoutSettings({ design, set, sectionTitles }) {
+function LayoutSettings({ design, bind, sectionTitles }) {
   return (
     <div className="field-stack">
-      <div className="layout-grid">
-        {LAYOUTS.map((layout) => (
-          <button
-            key={layout.value}
-            type="button"
-            className={`layout-card${design.layout === layout.value ? ' is-active' : ''}`}
-            onClick={() => set({ layout: layout.value })}
-          >
+      <Segmented
+        label="Layout"
+        className="shape-grid"
+        optionClass="option-card layout-card"
+        options={LAYOUTS}
+        {...bind('layout')}
+        renderOption={(layout) => (
+          <>
             <span className={`layout-card__diagram layout-card__diagram--${layout.value}`}>
               <i />
               <b />
             </span>
             {layout.label}
-          </button>
-        ))}
-      </div>
+          </>
+        )}
+      />
       <RangeField
         label="Sidebar width"
         min={24}
         max={45}
         unit="%"
-        value={design.sidebarWidth}
         disabled={design.layout === 'single'}
-        onChange={(sidebarWidth) => set({ sidebarWidth })}
+        {...bind('sidebarWidth')}
       />
       <div>
         <p className="settings-label">Experience & education entries</p>
-        <Segmented
-          label="Entry layout"
-          options={ENTRY_LAYOUTS}
-          value={design.entryLayout}
-          onChange={(entryLayout) => set({ entryLayout })}
-        />
+        <Segmented label="Entry layout" options={ENTRY_LAYOUTS} {...bind('entryLayout')} />
       </div>
-      <SectionOrder
-        sections={design.sections}
-        titles={sectionTitles}
-        layout={design.layout}
-        onChange={(sections) => set({ sections })}
-      />
+      <SectionOrder titles={sectionTitles} layout={design.layout} {...bind('sections')} />
     </div>
   )
 }

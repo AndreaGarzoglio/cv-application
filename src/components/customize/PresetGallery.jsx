@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FaCheck, FaFloppyDisk, FaTrash } from 'react-icons/fa6'
 import { BUILT_IN_PRESETS, matchesPreset, pickPresetDesign } from '../../data/presets.js'
-import { uid } from '../../utils/list.js'
+import { removeItem, uid, updateItem } from '../../utils/list.js'
 
 export function PresetThumb({ design }) {
   const c = design.colors
@@ -78,11 +78,8 @@ function PresetGallery({ design, onApply, customPresets, setCustomPresets }) {
     setName('')
   }
 
-  function update() {
-    setCustomPresets(
-      customPresets.map((p) => (p.id === active.id ? { ...p, design: pickPresetDesign(design) } : p)),
-    )
-  }
+  const update = () =>
+    setCustomPresets(updateItem(customPresets, active.id, { design: pickPresetDesign(design) }))
 
   return (
     <div className="field-stack">
@@ -124,7 +121,7 @@ function PresetGallery({ design, onApply, customPresets, setCustomPresets }) {
                 preset={preset}
                 isActive={preset.id === design.presetId}
                 onApply={onApply}
-                onDelete={(id) => setCustomPresets(customPresets.filter((p) => p.id !== id))}
+                onDelete={(id) => setCustomPresets(removeItem(customPresets, id))}
               />
             ))}
           </div>

@@ -61,23 +61,7 @@
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: var(--cv-page-bg);
-  }
-
-  body .resume--left::before {
-    background: linear-gradient(
-      to right,
-      var(--cv-side-bg) 0 var(--cv-side-w),
-      var(--cv-page-bg) var(--cv-side-w)
-    );
-  }
-
-  body .resume--right::before {
-    background: linear-gradient(
-      to left,
-      var(--cv-side-bg) 0 var(--cv-side-w),
-      var(--cv-page-bg) var(--cv-side-w)
-    );
+    background: var(--cv-sheet);
   }
 
   body .resume * {

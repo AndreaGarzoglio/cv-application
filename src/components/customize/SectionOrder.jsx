@@ -1,20 +1,16 @@
 import { FaArrowDown, FaArrowLeft, FaArrowRight, FaArrowUp } from 'react-icons/fa6'
+import IconButton from '../ui/IconButton.jsx'
 import { sectionTitle } from '../../data/sampleResume.js'
+import { swapAt } from '../../utils/list.js'
 
 const COLUMNS = [
   { id: 'sidebar', label: 'Sidebar' },
   { id: 'main', label: 'Main' },
 ]
 
-function move(list, index, dir) {
-  const next = [...list]
-  ;[next[index], next[index + dir]] = [next[index + dir], next[index]]
-  return next
-}
-
-function SectionOrder({ sections, titles, layout, onChange }) {
+function SectionOrder({ value: sections, titles, layout, onChange }) {
   function reorder(column, index, dir) {
-    onChange({ ...sections, [column]: move(sections[column], index, dir) })
+    onChange({ ...sections, [column]: swapAt(sections[column], index, dir) })
   }
 
   function switchColumn(column, key) {
@@ -36,32 +32,26 @@ function SectionOrder({ sections, titles, layout, onChange }) {
               {sections[column.id].map((key, i, list) => (
                 <li key={key} className="section-order__item">
                   <span>{sectionTitle(titles, key)}</span>
-                  <button
-                    type="button"
-                    className="icon-btn"
+                  <IconButton
                     title="Move up"
                     disabled={i === 0}
                     onClick={() => reorder(column.id, i, -1)}
                   >
                     <FaArrowUp size={10} />
-                  </button>
-                  <button
-                    type="button"
-                    className="icon-btn"
+                  </IconButton>
+                  <IconButton
                     title="Move down"
                     disabled={i === list.length - 1}
                     onClick={() => reorder(column.id, i, 1)}
                   >
                     <FaArrowDown size={10} />
-                  </button>
-                  <button
-                    type="button"
-                    className="icon-btn"
+                  </IconButton>
+                  <IconButton
                     title={`Move to ${column.id === 'sidebar' ? 'main' : 'sidebar'} column`}
                     onClick={() => switchColumn(column.id, key)}
                   >
                     {column.id === 'sidebar' ? <FaArrowRight size={10} /> : <FaArrowLeft size={10} />}
-                  </button>
+                  </IconButton>
                 </li>
               ))}
               {sections[column.id].length === 0 && <li className="section-order__empty">Empty</li>}

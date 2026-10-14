@@ -3,7 +3,7 @@ import EditorSection from '../EditorSection.jsx'
 import ItemActions from '../../ui/ItemActions.jsx'
 import LevelPicker from '../../ui/LevelPicker.jsx'
 import { LANGUAGE_LEVELS } from '../../../data/levels.js'
-import { moveItem, removeItem, uid, updateItem } from '../../../utils/list.js'
+import { rowProps, uid } from '../../../utils/list.js'
 
 function LanguagesSection({ languages, onChange, sectionProps }) {
   const add = () => onChange([...languages, { id: uid(), name: '', level: 3, note: '' }])
@@ -13,7 +13,7 @@ function LanguagesSection({ languages, onChange, sectionProps }) {
       {languages.length > 0 && (
         <ul className="item-list">
           {languages.map((language, i) => {
-            const set = (patch) => onChange(updateItem(languages, language.id, patch))
+            const { onChange: set, ...actions } = rowProps(languages, i, onChange)
             return (
               <li key={language.id} className="item-row mini-card">
                 <div className="item-row__line">
@@ -39,12 +39,7 @@ function LanguagesSection({ languages, onChange, sectionProps }) {
                     value={language.level}
                     onChange={(level) => set({ level })}
                   />
-                  <ItemActions
-                    isFirst={i === 0}
-                    isLast={i === languages.length - 1}
-                    onMove={(dir) => onChange(moveItem(languages, language.id, dir))}
-                    onRemove={() => onChange(removeItem(languages, language.id))}
-                  />
+                  <ItemActions {...actions} />
                 </div>
               </li>
             )

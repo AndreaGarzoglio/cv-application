@@ -318,33 +318,6 @@
   color: var(--text-faint);
 }
 
-.entry-card.is-hidden .entry-card__title {
-  color: var(--text-faint);
-  text-decoration: line-through;
-}
-
-.entry-card__chevron svg {
-  transition: transform 0.35s var(--ease);
-}
-
-.entry-card.is-open .entry-card__chevron svg {
-  transform: rotate(180deg);
-}
-
-.entry-card__body {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.4s var(--ease);
-}
-
-.entry-card.is-open .entry-card__body {
-  grid-template-rows: 1fr;
-}
-
-.entry-card__content {
-  overflow: hidden;
-}
-
 .entry-card__fields {
   padding: 0.5rem 0.75rem 0.85rem;
   border-top: 1px solid var(--border);

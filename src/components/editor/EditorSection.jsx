@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { FaChevronDown, FaEye, FaEyeSlash, FaPen } from 'react-icons/fa6'
+import IconButton from '../ui/IconButton.jsx'
 import '../../styles/EditorSection.css'
 
 function EditorSection({
@@ -49,33 +50,25 @@ function EditorSection({
         )}
 
         {onRename && (
-          <button
-            type="button"
-            className="icon-btn"
-            title="Rename section"
-            onClick={() => setRenaming(true)}
-          >
+          <IconButton title="Rename section" onClick={() => setRenaming(true)}>
             <FaPen size={12} />
-          </button>
+          </IconButton>
         )}
         {onToggleHidden && (
-          <button
-            type="button"
-            className="icon-btn"
+          <IconButton
             title={hidden ? 'Show in resume' : 'Hide from resume'}
             onClick={onToggleHidden}
           >
             {hidden ? <FaEyeSlash size={14} /> : <FaEye size={14} />}
-          </button>
+          </IconButton>
         )}
-        <button
-          type="button"
-          className="icon-btn ed-section__chevron"
+        <IconButton
+          className="ed-section__chevron"
           aria-label={open ? 'Collapse section' : 'Expand section'}
           onClick={() => setOpen((o) => !o)}
         >
           <FaChevronDown size={12} />
-        </button>
+        </IconButton>
       </div>
 
       <div className="ed-section__body" inert={!open}>

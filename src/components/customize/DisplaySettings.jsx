@@ -34,37 +34,18 @@ function Select({ label, value, options, onChange }) {
   )
 }
 
-function DisplaySettings({ design, set }) {
+function DisplaySettings({ design, bind }) {
   return (
     <div className="field-stack">
       <div className="field-row">
-        <Select
-          label="Skills"
-          value={design.skillStyle}
-          options={SKILL_STYLES}
-          onChange={(skillStyle) => set({ skillStyle })}
-        />
-        <Select
-          label="Languages"
-          value={design.languageStyle}
-          options={LEVEL_STYLES}
-          onChange={(languageStyle) => set({ languageStyle })}
-        />
+        <Select label="Skills" options={SKILL_STYLES} {...bind('skillStyle')} />
+        <Select label="Languages" options={LEVEL_STYLES} {...bind('languageStyle')} />
       </div>
       <div>
         <p className="settings-label">Interests</p>
-        <Segmented
-          label="Interests style"
-          options={INTEREST_STYLES}
-          value={design.interestStyle}
-          onChange={(interestStyle) => set({ interestStyle })}
-        />
+        <Segmented label="Interests style" options={INTEREST_STYLES} {...bind('interestStyle')} />
       </div>
-      <Switch
-        label="Show contact icons"
-        checked={design.showContactIcons}
-        onChange={(showContactIcons) => set({ showContactIcons })}
-      />
+      <Switch label="Show contact icons" {...bind('showContactIcons')} />
       <div>
         <p className="settings-label">Date format</p>
         <Segmented
@@ -73,15 +54,13 @@ function DisplaySettings({ design, set }) {
             value: format,
             label: formatMonth('2024-03', format, design.resumeLanguage),
           }))}
-          value={design.dateFormat}
-          onChange={(dateFormat) => set({ dateFormat })}
+          {...bind('dateFormat')}
         />
       </div>
       <Select
         label="Resume language (dates, “Present”, “Grade”)"
-        value={design.resumeLanguage}
         options={Object.entries(RESUME_LANGUAGES).map(([value, l]) => ({ value, label: l.label }))}
-        onChange={(resumeLanguage) => set({ resumeLanguage })}
+        {...bind('resumeLanguage')}
       />
     </div>
   )

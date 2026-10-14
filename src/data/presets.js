@@ -1,30 +1,3 @@
-// Design keys a preset controls. Content-related settings (language,
-// date format, section order, photo visibility) are left untouched.
-export const PRESET_KEYS = [
-  'layout',
-  'sidebarWidth',
-  'colors',
-  'bodyFont',
-  'headingFont',
-  'fontSize',
-  'lineHeight',
-  'pageMargin',
-  'sectionGap',
-  'headingStyle',
-  'headingUppercase',
-  'photoShape',
-  'photoSize',
-  'skillStyle',
-  'languageStyle',
-  'interestStyle',
-  'entryLayout',
-  'showContactIcons',
-  'photoRing',
-  'decoration',
-  'nameGradient',
-  'showSectionIcons',
-]
-
 const base = {
   layout: 'left',
   sidebarWidth: 34,
@@ -48,6 +21,10 @@ const base = {
   nameGradient: false,
   showSectionIcons: false,
 }
+
+// Design keys a preset controls. Content-related settings (language,
+// date format, section order, photo visibility) are left untouched.
+const PRESET_KEYS = [...Object.keys(base), 'colors']
 
 export const BUILT_IN_PRESETS = [
   {
@@ -226,7 +203,6 @@ export const BUILT_IN_PRESETS = [
     design: {
       ...base,
       layout: 'single',
-      bodyFont: 'Inter',
       headingFont: 'Space Grotesk',
       headingStyle: 'accent',
       entryLayout: 'timeline',
@@ -324,7 +300,6 @@ export const BUILT_IN_PRESETS = [
     name: 'Noir',
     design: {
       ...base,
-      bodyFont: 'Inter',
       headingFont: 'Space Grotesk',
       decoration: 'corner',
       photoShape: 'rounded',

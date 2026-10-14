@@ -4,9 +4,9 @@ import LevelIndicator from './LevelIndicator.jsx'
 import { LANGUAGE_LEVELS, SKILL_LEVELS } from '../../data/levels.js'
 import { contactHref, displayValue, getPlatform } from '../../data/platforms.js'
 
-export function ResumeSection({ title, icon: Icon, className = '', children }) {
+export function ResumeSection({ title, icon: Icon, children }) {
   return (
-    <section className={`cv-section ${className}`}>
+    <section className="cv-section">
       <h2 className="cv-section__title">
         <span>
           {Icon && <Icon className="cv-section__icon" aria-hidden="true" />}
@@ -68,7 +68,6 @@ export function LevelList({ items, variant, labels, renderNote }) {
 
 export function LanguageList({ languages, variant }) {
   const items = languages.filter((l) => l.name.trim())
-  if (items.length === 0) return null
   return (
     <LevelList
       items={items}
@@ -83,7 +82,6 @@ export function SkillGroups({ categories, variant }) {
   const groups = categories
     .map((c) => ({ ...c, skills: c.skills.filter((s) => s.name.trim()) }))
     .filter((c) => c.skills.length > 0)
-  if (groups.length === 0) return null
 
   return (
     <div className="cv-skill-groups">
@@ -124,7 +122,6 @@ export function InterestList({ interests, variant }) {
 
 export function EntryList({ entries, design, getHeading }) {
   const items = entries.filter((e) => !e.hidden)
-  if (items.length === 0) return null
 
   return (
     <div className={`cv-entries cv-entries--${design.entryLayout}`}>

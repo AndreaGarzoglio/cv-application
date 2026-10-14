@@ -12,6 +12,8 @@
 }
 
 .workspace__editor {
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   border-right: 1px solid var(--border);
   background: var(--surface);
@@ -23,11 +25,6 @@
   background-color: var(--bg);
   background-image: radial-gradient(var(--surface-3) 1px, transparent 1px);
   background-size: 22px 22px;
-}
-
-.workspace__editor {
-  display: flex;
-  flex-direction: column;
 }
 
 .workspace__panel {

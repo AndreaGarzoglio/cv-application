@@ -8,6 +8,9 @@ const ACCENTS = [
 function ColorSettings({ design, onColors }) {
   const c = design.colors
   const hasSidebar = design.layout !== 'single'
+  const field = (key, label) => (
+    <ColorField label={label} value={c[key]} onChange={(value) => onColors({ [key]: value })} />
+  )
 
   return (
     <div className="field-stack">
@@ -26,12 +29,8 @@ function ColorSettings({ design, onColors }) {
           ))}
         </div>
         <div className="color-grid">
-          <ColorField label="Accent" value={c.accent} onChange={(accent) => onColors({ accent })} />
-          <ColorField
-            label="Second accent"
-            value={c.accent2}
-            onChange={(accent2) => onColors({ accent2 })}
-          />
+          {field('accent', 'Accent')}
+          {field('accent2', 'Second accent')}
         </div>
         <p className="hint">
           Gradients blend the two accents.{' '}
@@ -46,9 +45,9 @@ function ColorSettings({ design, onColors }) {
       <div>
         <p className="settings-label">Page</p>
         <div className="color-grid">
-          <ColorField label="Background" value={c.pageBg} onChange={(pageBg) => onColors({ pageBg })} />
-          <ColorField label="Text" value={c.text} onChange={(text) => onColors({ text })} />
-          <ColorField label="Headings" value={c.heading} onChange={(heading) => onColors({ heading })} />
+          {field('pageBg', 'Background')}
+          {field('text', 'Text')}
+          {field('heading', 'Headings')}
         </div>
       </div>
 
@@ -57,13 +56,9 @@ function ColorSettings({ design, onColors }) {
           Sidebar {!hasSidebar && <span>(used by two-column layouts)</span>}
         </p>
         <div className="color-grid">
-          <ColorField label="Background" value={c.sidebarBg} onChange={(sidebarBg) => onColors({ sidebarBg })} />
-          <ColorField label="Text" value={c.sidebarText} onChange={(sidebarText) => onColors({ sidebarText })} />
-          <ColorField
-            label="Headings"
-            value={c.sidebarHeading}
-            onChange={(sidebarHeading) => onColors({ sidebarHeading })}
-          />
+          {field('sidebarBg', 'Background')}
+          {field('sidebarText', 'Text')}
+          {field('sidebarHeading', 'Headings')}
         </div>
       </div>
     </div>

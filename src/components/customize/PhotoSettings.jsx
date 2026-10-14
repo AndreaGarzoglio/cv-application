@@ -1,4 +1,5 @@
 import RangeField from '../ui/RangeField.jsx'
+import Segmented from '../ui/Segmented.jsx'
 import Switch from '../ui/Switch.jsx'
 
 const SHAPES = [
@@ -10,42 +11,35 @@ const SHAPES = [
   { value: 'arch', label: 'Arch' },
 ]
 
-function PhotoSettings({ design, set, hasPhoto }) {
+function PhotoSettings({ design, bind, hasPhoto }) {
   return (
     <div className="field-stack">
-      <Switch label="Show photo" checked={design.showPhoto} onChange={(showPhoto) => set({ showPhoto })} />
+      <Switch label="Show photo" {...bind('showPhoto')} />
       <div className={design.showPhoto ? undefined : 'is-disabled'}>
         <p className="settings-label">Shape</p>
-        <div className="shape-grid" role="radiogroup" aria-label="Photo shape">
-          {SHAPES.map((shape) => (
-            <button
-              key={shape.value}
-              type="button"
-              role="radio"
-              aria-checked={design.photoShape === shape.value}
-              className={`option-card${design.photoShape === shape.value ? ' is-active' : ''}`}
-              onClick={() => set({ photoShape: shape.value })}
-            >
+        <Segmented
+          label="Photo shape"
+          className="shape-grid"
+          optionClass="option-card"
+          options={SHAPES}
+          {...bind('photoShape')}
+          renderOption={(shape) => (
+            <>
               <span className={`shape-preview cv-photo--${shape.value}`} />
               {shape.label}
-            </button>
-          ))}
-        </div>
+            </>
+          )}
+        />
       </div>
-      <Switch
-        label="Gradient ring"
-        checked={design.photoRing}
-        onChange={(photoRing) => set({ photoRing })}
-      />
+      <Switch label="Gradient ring" {...bind('photoRing')} />
       <RangeField
         label="Size"
         min={72}
         max={180}
         step={4}
         unit="px"
-        value={design.photoSize}
         disabled={!design.showPhoto}
-        onChange={(photoSize) => set({ photoSize })}
+        {...bind('photoSize')}
       />
       {!hasPhoto && <p className="hint">Upload a photo in Content → Personal details.</p>}
     </div>

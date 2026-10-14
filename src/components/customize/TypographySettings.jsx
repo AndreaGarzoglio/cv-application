@@ -30,34 +30,15 @@ function FontSelect({ label, value, onChange }) {
   )
 }
 
-function TypographySettings({ design, set }) {
+function TypographySettings({ bind }) {
   return (
     <div className="field-stack">
       <div className="field-row">
-        <FontSelect
-          label="Headings font"
-          value={design.headingFont}
-          onChange={(headingFont) => set({ headingFont })}
-        />
-        <FontSelect label="Body font" value={design.bodyFont} onChange={(bodyFont) => set({ bodyFont })} />
+        <FontSelect label="Headings font" {...bind('headingFont')} />
+        <FontSelect label="Body font" {...bind('bodyFont')} />
       </div>
-      <RangeField
-        label="Font size"
-        min={10}
-        max={16}
-        step={0.5}
-        unit="px"
-        value={design.fontSize}
-        onChange={(fontSize) => set({ fontSize })}
-      />
-      <RangeField
-        label="Line height"
-        min={1.2}
-        max={1.9}
-        step={0.05}
-        value={design.lineHeight}
-        onChange={(lineHeight) => set({ lineHeight })}
-      />
+      <RangeField label="Font size" min={10} max={16} step={0.5} unit="px" {...bind('fontSize')} />
+      <RangeField label="Line height" min={1.2} max={1.9} step={0.05} {...bind('lineHeight')} />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import EditorSection from '../EditorSection.jsx'
 import ItemActions from '../../ui/ItemActions.jsx'
 import LevelPicker from '../../ui/LevelPicker.jsx'
 import { SKILL_LEVELS } from '../../../data/levels.js'
-import { moveItem, removeItem, uid, updateItem } from '../../../utils/list.js'
+import { rowProps, uid } from '../../../utils/list.js'
 
 function SkillCategory({ category, onChange, ...actions }) {
   const { skills } = category
@@ -27,7 +27,7 @@ function SkillCategory({ category, onChange, ...actions }) {
       {skills.length > 0 && (
         <ul className="item-list skill-list">
           {skills.map((skill, i) => {
-            const set = (patch) => setSkills(updateItem(skills, skill.id, patch))
+            const { onChange: set, ...actions } = rowProps(skills, i, setSkills)
             return (
               <li key={skill.id} className="item-row item-row__line">
                 <input
@@ -44,12 +44,7 @@ function SkillCategory({ category, onChange, ...actions }) {
                   value={skill.level}
                   onChange={(level) => set({ level })}
                 />
-                <ItemActions
-                  isFirst={i === 0}
-                  isLast={i === skills.length - 1}
-                  onMove={(dir) => setSkills(moveItem(skills, skill.id, dir))}
-                  onRemove={() => setSkills(removeItem(skills, skill.id))}
-                />
+                <ItemActions {...actions} />
               </li>
             )
           })}
@@ -74,11 +69,7 @@ function SkillsSection({ categories, onChange, sectionProps }) {
             <SkillCategory
               key={category.id}
               category={category}
-              isFirst={i === 0}
-              isLast={i === categories.length - 1}
-              onChange={(patch) => onChange(updateItem(categories, category.id, patch))}
-              onMove={(dir) => onChange(moveItem(categories, category.id, dir))}
-              onRemove={() => onChange(removeItem(categories, category.id))}
+              {...rowProps(categories, i, onChange)}
             />
           ))}
         </ul>

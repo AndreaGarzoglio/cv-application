@@ -9,12 +9,18 @@ export function formatMonth(value, format, lang) {
   if (!year) return ''
   if (format === 'year' || !month) return String(year)
   if (format === 'numeric') return `${String(month).padStart(2, '0')}/${year}`
-  const date = new Date(year, month - 1, 1)
-  const text = new Intl.DateTimeFormat(lang, {
-    month: format === 'long' ? 'long' : 'short',
-    year: 'numeric',
-  }).format(date)
-  return capitalize(text)
+  return capitalize(formatter(lang, format).format(new Date(year, month - 1, 1)))
+}
+
+// Creating an Intl formatter is slow, and every entry formats two dates per render.
+const formatters = new Map()
+function formatter(lang, format) {
+  const key = `${lang}|${format}`
+  if (!formatters.has(key)) {
+    const month = format === 'long' ? 'long' : 'short'
+    formatters.set(key, new Intl.DateTimeFormat(lang, { month, year: 'numeric' }))
+  }
+  return formatters.get(key)
 }
 
 export function formatRange({ startDate, endDate, current }, format, lang) {

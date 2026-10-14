@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useEffect, useEffectEvent, useLayoutEffect, useRef, useState } from 'react'
 import { PAGE_HEIGHT, PAGE_WIDTH } from '../../data/design.js'
 import {
   ContactList,
@@ -59,11 +59,6 @@ function Identity({ personal, gradient }) {
   )
 }
 
-// Fragment wrapper so falsy blocks render nothing.
-function BlockSlot({ children }) {
-  return children || null
-}
-
 // Blocks that must not be cut by a page break. A block that would cross one
 // (or sit in the top/bottom margin of a page) is pushed to the next page.
 const UNITS = [
@@ -90,15 +85,20 @@ function keepWithNext(el, fontSize) {
 function usePagination(margin, fontSize) {
   const outerRef = useRef(null)
   const innerRef = useRef(null)
+  const paginatedHeight = useRef(0)
   const [pages, setPages] = useState(1)
 
-  const paginate = useCallback(() => {
+  const paginate = useEffectEvent(() => {
     const outer = outerRef.current
-    const units = innerRef.current.querySelectorAll(UNITS)
+    const inner = innerRef.current
+    const units = inner.querySelectorAll(UNITS)
     units.forEach((el) => (el.style.marginTop = ''))
 
     const box = outer.getBoundingClientRect()
-    if (box.width === 0) return // preview hidden (mobile edit view)
+    if (box.width === 0) {
+      paginatedHeight.current = 0 // preview hidden (mobile edit view)
+      return
+    }
     // Measure in page pixels, independent of the preview zoom.
     const scale = box.width / PAGE_WIDTH
 
@@ -113,23 +113,23 @@ function usePagination(margin, fontSize) {
         el.style.marginTop = `${current + pageBreak + margin - top}px`
       }
     }
-    return innerRef.current.getBoundingClientRect().height / scale
-  }, [margin, fontSize])
-
-  // Re-run after every render, before paint, so content never flickers.
-  useLayoutEffect(() => {
-    paginate()
+    paginatedHeight.current = inner.offsetHeight
+    const height = inner.getBoundingClientRect().height / scale
+    setPages(Math.max(1, Math.ceil((height - 1) / PAGE_HEIGHT)))
   })
 
-  // Page count, and late layout changes such as web fonts finishing loading.
+  // Re-run after every render, before paint, so content never flickers.
+  useLayoutEffect(() => paginate())
+
+  // Late layout changes, such as web fonts finishing loading. Resizes caused by
+  // the pagination itself are skipped.
   useEffect(() => {
     const observer = new ResizeObserver(() => {
-      const height = paginate()
-      if (height) setPages(Math.max(1, Math.ceil((height - 1) / PAGE_HEIGHT)))
+      if (innerRef.current.offsetHeight !== paginatedHeight.current) paginate()
     })
     observer.observe(innerRef.current)
     return () => observer.disconnect()
-  }, [paginate])
+  }, [])
 
   return { outerRef, innerRef, pages }
 }
@@ -138,75 +138,66 @@ function Resume({ resume, design }) {
   const { outerRef, innerRef, pages } = usePagination(design.pageMargin, design.fontSize)
   const isSingle = design.layout === 'single'
   const isVisible = (key) => !resume.hiddenSections.includes(key)
-  const titles = Object.fromEntries(
-    Object.keys(resume.sectionTitles).map((key) => [key, sectionTitle(resume.sectionTitles, key)]),
-  )
   const { sidebar, main } = design.sections
-  const icon = (key) => (design.showSectionIcons ? SECTION_ICONS[key] : null)
 
+  // Each block returns its content, or nothing when the section is empty.
   const blocks = {
     contacts: () =>
       resume.contacts.some((c) => c.value.trim()) && (
-        <ResumeSection icon={icon('contacts')} title={titles.contacts}>
-          <ContactList contacts={resume.contacts} showIcons={design.showContactIcons} />
-        </ResumeSection>
+        <ContactList contacts={resume.contacts} showIcons={design.showContactIcons} />
       ),
     languages: () =>
       resume.languages.some((l) => l.name.trim()) && (
-        <ResumeSection icon={icon('languages')} title={titles.languages}>
-          <LanguageList languages={resume.languages} variant={design.languageStyle} />
-        </ResumeSection>
+        <LanguageList languages={resume.languages} variant={design.languageStyle} />
       ),
     skills: () =>
       resume.skillCategories.some((c) => c.skills.some((s) => s.name.trim())) && (
-        <ResumeSection icon={icon('skills')} title={titles.skills}>
-          <SkillGroups categories={resume.skillCategories} variant={design.skillStyle} />
-        </ResumeSection>
+        <SkillGroups categories={resume.skillCategories} variant={design.skillStyle} />
       ),
     interests: () =>
       resume.interests.length > 0 && (
-        <ResumeSection icon={icon('interests')} title={titles.interests}>
-          <InterestList interests={resume.interests} variant={design.interestStyle} />
-        </ResumeSection>
+        <InterestList interests={resume.interests} variant={design.interestStyle} />
       ),
-    profile: () =>
-      resume.profile.trim() && (
-        <ResumeSection icon={icon('profile')} title={titles.profile}>
-          <RichText text={resume.profile} />
-        </ResumeSection>
-      ),
+    profile: () => resume.profile.trim() && <RichText text={resume.profile} />,
     experience: () =>
       resume.experience.some((e) => !e.hidden) && (
-        <ResumeSection icon={icon('experience')} title={titles.experience}>
-          <EntryList
-            entries={resume.experience}
-            design={design}
-            getHeading={(e) => ({ title: e.position, subtitle: e.company })}
-          />
-        </ResumeSection>
+        <EntryList
+          entries={resume.experience}
+          design={design}
+          getHeading={(e) => ({ title: e.position, subtitle: e.company })}
+        />
       ),
     education: () =>
       resume.education.some((e) => !e.hidden) && (
-        <ResumeSection icon={icon('education')} title={titles.education}>
-          <EntryList
-            entries={resume.education}
-            design={design}
-            getHeading={(e) => ({
-              title: e.degree,
-              subtitle: e.school,
-              extra: e.grade?.trim() && (
-                <p className="cv-entry__grade">
-                  {getStrings(design.resumeLanguage).grade}: <strong>{e.grade}</strong>
-                </p>
-              ),
-            })}
-          />
-        </ResumeSection>
+        <EntryList
+          entries={resume.education}
+          design={design}
+          getHeading={(e) => ({
+            title: e.degree,
+            subtitle: e.school,
+            extra: e.grade?.trim() && (
+              <p className="cv-entry__grade">
+                {getStrings(design.resumeLanguage).grade}: <strong>{e.grade}</strong>
+              </p>
+            ),
+          })}
+        />
       ),
   }
 
   const renderBlocks = (keys) =>
-    keys.filter(isVisible).map((key) => <BlockSlot key={key}>{blocks[key]()}</BlockSlot>)
+    keys.filter(isVisible).map((key) => {
+      const content = blocks[key]()
+      return content ? (
+        <ResumeSection
+          key={key}
+          icon={design.showSectionIcons ? SECTION_ICONS[key] : null}
+          title={sectionTitle(resume.sectionTitles, key)}
+        >
+          {content}
+        </ResumeSection>
+      ) : null
+    })
 
   return (
     <article

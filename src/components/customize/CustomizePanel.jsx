@@ -25,6 +25,8 @@ import '../../styles/Customize.css'
 function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, resume }) {
   const set = (patch) => setDesign((d) => ({ ...d, ...patch }))
   const onColors = (patch) => setDesign((d) => ({ ...d, colors: { ...d.colors, ...patch } }))
+  // Value and change handler for a control bound to the design key `key`.
+  const bind = (key) => ({ value: design[key], onChange: (value) => set({ [key]: value }) })
 
   return (
     <div className="editor">
@@ -37,16 +39,16 @@ function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, re
         />
       </EditorSection>
       <EditorSection icon={FaTableColumns} title="Layout">
-        <LayoutSettings design={design} set={set} sectionTitles={resume.sectionTitles} />
+        <LayoutSettings design={design} bind={bind} sectionTitles={resume.sectionTitles} />
       </EditorSection>
       <EditorSection icon={FaPalette} title="Colors">
         <ColorSettings design={design} onColors={onColors} />
       </EditorSection>
       <EditorSection icon={FaShapes} title="Shapes & effects">
-        <DecorationSettings design={design} set={set} />
+        <DecorationSettings design={design} bind={bind} />
       </EditorSection>
       <EditorSection icon={FaFont} title="Typography">
-        <TypographySettings design={design} set={set} />
+        <TypographySettings bind={bind} />
       </EditorSection>
       <EditorSection icon={FaRulerCombined} title="Spacing">
         <div className="field-stack">
@@ -56,28 +58,25 @@ function CustomizePanel({ design, setDesign, customPresets, setCustomPresets, re
             max={64}
             step={2}
             unit="px"
-            value={design.pageMargin}
-            onChange={(pageMargin) => set({ pageMargin })}
+            {...bind('pageMargin')}
           />
           <RangeField
             label="Space between sections"
             min={10}
             max={44}
-            step={1}
             unit="px"
-            value={design.sectionGap}
-            onChange={(sectionGap) => set({ sectionGap })}
+            {...bind('sectionGap')}
           />
         </div>
       </EditorSection>
       <EditorSection icon={FaHeading} title="Section headings">
-        <HeadingSettings design={design} set={set} />
+        <HeadingSettings bind={bind} />
       </EditorSection>
       <EditorSection icon={FaCamera} title="Photo">
-        <PhotoSettings design={design} set={set} hasPhoto={Boolean(resume.personal.photo)} />
+        <PhotoSettings design={design} bind={bind} hasPhoto={Boolean(resume.personal.photo)} />
       </EditorSection>
       <EditorSection icon={FaListCheck} title="Details & dates">
-        <DisplaySettings design={design} set={set} />
+        <DisplaySettings design={design} bind={bind} />
       </EditorSection>
     </div>
   )

@@ -1,26 +1,30 @@
+// Weights loaded from Google Fonts; families not listed here load 400 to 700.
+const WEIGHTS = {
+  Lato: '400;700',
+  Roboto: '400;500;700',
+  'DM Serif Display': null,
+  Merriweather: '400;700',
+  'Libre Baskerville': '400;700',
+}
+
+const group = (category, names) =>
+  names.map((name) => ({
+    name,
+    category,
+    weights: name in WEIGHTS ? WEIGHTS[name] : '400;500;600;700',
+  }))
+
+// In font picker order.
 export const FONTS = [
-  { name: 'Inter', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Poppins', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Montserrat', category: 'sans', weights: '400;500;600;700' },
-  { name: 'DM Sans', category: 'sans', weights: '400;500;600;700' },
-  { name: 'IBM Plex Sans', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Work Sans', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Nunito', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Raleway', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Lato', category: 'sans', weights: '400;700' },
-  { name: 'Open Sans', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Roboto', category: 'sans', weights: '400;500;700' },
-  { name: 'Source Sans 3', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Space Grotesk', category: 'sans', weights: '400;500;600;700' },
-  { name: 'Playfair Display', category: 'serif', weights: '400;500;600;700' },
-  { name: 'DM Serif Display', category: 'serif', weights: null },
-  { name: 'Merriweather', category: 'serif', weights: '400;700' },
-  { name: 'Lora', category: 'serif', weights: '400;500;600;700' },
-  { name: 'Libre Baskerville', category: 'serif', weights: '400;700' },
-  { name: 'EB Garamond', category: 'serif', weights: '400;500;600;700' },
-  { name: 'Source Serif 4', category: 'serif', weights: '400;500;600;700' },
-  { name: 'Roboto Slab', category: 'serif', weights: '400;500;600;700' },
-  { name: 'JetBrains Mono', category: 'mono', weights: '400;500;600;700' },
+  ...group('sans', [
+    'Inter', 'Poppins', 'Montserrat', 'DM Sans', 'IBM Plex Sans', 'Work Sans', 'Nunito',
+    'Raleway', 'Lato', 'Open Sans', 'Roboto', 'Source Sans 3', 'Space Grotesk',
+  ]),
+  ...group('serif', [
+    'Playfair Display', 'DM Serif Display', 'Merriweather', 'Lora', 'Libre Baskerville',
+    'EB Garamond', 'Source Serif 4', 'Roboto Slab',
+  ]),
+  ...group('mono', ['JetBrains Mono']),
 ]
 
 const FALLBACK = { sans: 'system-ui, sans-serif', serif: 'Georgia, serif', mono: 'ui-monospace, monospace' }

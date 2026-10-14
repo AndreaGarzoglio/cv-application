@@ -1,7 +1,7 @@
-import { useCallback, useRef, useState } from 'react'
+import { useState } from 'react'
 import { FaMagnifyingGlass } from 'react-icons/fa6'
 import { PLATFORM_GROUPS } from '../../data/platforms.js'
-import { useDismiss } from '../../hooks/useDismiss.js'
+import { useMenu } from '../../hooks/useMenu.js'
 import '../../styles/PlatformMenu.css'
 
 function PlatformPicker({ selected, onSelect }) {
@@ -52,14 +52,11 @@ function PlatformPicker({ selected, onSelect }) {
   )
 }
 
-function PlatformMenu({ selected, onSelect, renderTrigger, className = '' }) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef(null)
-  const close = useCallback(() => setOpen(false), [])
-  useDismiss(ref, close, open)
+function PlatformMenu({ selected, onSelect, renderTrigger }) {
+  const { open, setOpen, ref } = useMenu()
 
   return (
-    <div className={`platform-menu ${className}`} ref={ref}>
+    <div ref={ref}>
       {renderTrigger({ open, toggle: () => setOpen((o) => !o) })}
       {open && (
         <PlatformPicker

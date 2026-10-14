@@ -67,7 +67,9 @@
   white-space: nowrap;
 }
 
-.ed-section.is-hidden .ed-section__title {
+/* Entry cards in the content editor collapse the same way as sections. */
+.ed-section.is-hidden .ed-section__title,
+.entry-card.is-hidden .entry-card__title {
   color: var(--text-faint);
   text-decoration: line-through;
 }
@@ -85,25 +87,30 @@
   outline: none;
 }
 
-.ed-section__chevron svg {
+.ed-section__chevron svg,
+.entry-card__chevron svg {
   transition: transform 0.35s var(--ease);
 }
 
-.ed-section.is-open .ed-section__chevron svg {
+.ed-section.is-open .ed-section__chevron svg,
+.entry-card.is-open .entry-card__chevron svg {
   transform: rotate(180deg);
 }
 
-.ed-section__body {
+.ed-section__body,
+.entry-card__body {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows 0.4s var(--ease);
 }
 
-.ed-section.is-open .ed-section__body {
+.ed-section.is-open .ed-section__body,
+.entry-card.is-open .entry-card__body {
   grid-template-rows: 1fr;
 }
 
-.ed-section__content {
+.ed-section__content,
+.entry-card__content {
   overflow: hidden;
 }
 

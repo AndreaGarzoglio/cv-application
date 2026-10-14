@@ -24,7 +24,7 @@ export function mergeDesign(stored) {
     colors: {
       ...DEFAULT_DESIGN.colors,
       // Designs saved before the secondary accent existed reuse their accent.
-      accent2: stored.colors?.accent2 ?? stored.colors?.accent ?? DEFAULT_DESIGN.colors.accent2,
+      accent2: stored.colors?.accent ?? DEFAULT_DESIGN.colors.accent2,
       ...stored.colors,
     },
     sections: { ...DEFAULT_DESIGN.sections, ...stored.sections },

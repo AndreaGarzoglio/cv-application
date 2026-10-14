@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useRef } from 'react'
 import {
   FaChevronDown,
   FaEraser,
@@ -7,15 +7,12 @@ import {
   FaFilePdf,
   FaWandMagicSparkles,
 } from 'react-icons/fa6'
-import { useDismiss } from '../hooks/useDismiss.js'
+import { useMenu } from '../hooks/useMenu.js'
 import '../styles/Topbar.css'
 
 function DataMenu({ onExport, onImport, onLoadSample, onClear }) {
-  const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const { open, setOpen, ref } = useMenu()
   const fileInput = useRef(null)
-  const close = useCallback(() => setOpen(false), [])
-  useDismiss(ref, close, open)
 
   function run(action) {
     setOpen(false)

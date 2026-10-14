@@ -1,44 +1,28 @@
 import { FaArrowDown, FaArrowUp, FaCopy, FaEye, FaEyeSlash, FaTrash } from 'react-icons/fa6'
+import IconButton from './IconButton.jsx'
 
 function ItemActions({ isFirst, isLast, onMove, onRemove, onDuplicate, hidden, onToggleHidden }) {
   return (
     <div className="item-actions">
-      <button
-        type="button"
-        className="icon-btn"
-        title="Move up"
-        disabled={isFirst}
-        onClick={() => onMove(-1)}
-      >
+      <IconButton title="Move up" disabled={isFirst} onClick={() => onMove(-1)}>
         <FaArrowUp size={11} />
-      </button>
-      <button
-        type="button"
-        className="icon-btn"
-        title="Move down"
-        disabled={isLast}
-        onClick={() => onMove(1)}
-      >
+      </IconButton>
+      <IconButton title="Move down" disabled={isLast} onClick={() => onMove(1)}>
         <FaArrowDown size={11} />
-      </button>
+      </IconButton>
       {onDuplicate && (
-        <button type="button" className="icon-btn" title="Duplicate" onClick={onDuplicate}>
+        <IconButton title="Duplicate" onClick={onDuplicate}>
           <FaCopy size={11} />
-        </button>
+        </IconButton>
       )}
       {onToggleHidden && (
-        <button
-          type="button"
-          className="icon-btn"
-          title={hidden ? 'Show in resume' : 'Hide from resume'}
-          onClick={onToggleHidden}
-        >
+        <IconButton title={hidden ? 'Show in resume' : 'Hide from resume'} onClick={onToggleHidden}>
           {hidden ? <FaEyeSlash size={12} /> : <FaEye size={12} />}
-        </button>
+        </IconButton>
       )}
-      <button type="button" className="icon-btn icon-btn--danger" title="Delete" onClick={onRemove}>
+      <IconButton className="icon-btn--danger" title="Delete" onClick={onRemove}>
         <FaTrash size={11} />
-      </button>
+      </IconButton>
     </div>
   )
 }
