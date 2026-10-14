@@ -6,6 +6,8 @@ assignment from The Odin Project and grew into a full builder inspired by FlowCV
 
 Edit your content on the left and watch an A4 preview update live on the right.
 
+**Live demo:** published on Vercel, link coming soon.
+
 ## Features
 
 **Content**
@@ -47,32 +49,11 @@ Edit your content on the left and watch an A4 preview update live on the right.
 - Autosave to `localStorage`, JSON import/export, example data and reset
 - Responsive: on mobile you switch between editor and preview
 
-## Getting started
-
-```bash
-npm install
-npm run dev
-```
-
-Other scripts:
-
-```bash
-npm run build     # production build in dist/
-npm run preview   # serve the production build
-npm run lint      # ESLint
-```
-
 ## Exporting a PDF
 
 Click **Download PDF** and choose **Save as PDF** as the destination in the
 print dialog. Margins and backgrounds are handled by the app; leave the
 paper size on A4.
-
-## Deploying to Vercel
-
-Import the repository in Vercel: it detects Vite automatically
-(build command `npm run build`, output directory `dist`). No extra
-configuration is needed.
 
 ## Project structure
 
@@ -84,7 +65,7 @@ src/
     preview/     A4 preview and resume renderer
     ui/          small reusable inputs
   data/          sample resume, presets, fonts, platforms, levels, locales
-  hooks/         useLocalStorage, useDismiss
+  hooks/         useLocalStorage, useMenu
   utils/         list helpers, dates, files, image resizing
   styles/        one stylesheet per area, plus print.css
 ```
